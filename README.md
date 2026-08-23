@@ -44,8 +44,6 @@ Point `CLAUDE_SETUP_SYSTEM_SETUP_CATALOG` at a directory to use setups of your o
 
 ## What it manages
 
-## What it manages
-
 | | |
 | --- | --- |
 | Product | Claude Code (Anthropic) |
