@@ -7,14 +7,9 @@ the whole configuration — not a pointer to somewhere the content really lives.
 That is what makes restore mean something: it returns the instructions, skills,
 agents, commands, hooks, MCP entries and settings together, in one step.
 
-> **Status: the provider surface answers.** `provider-info`, `status`,
-> `validate-bundle`, `plan-operation`, `apply-operation` and `recover-operation`
-> are implemented. `backup`, `restore` and `remove` are applied end to end;
-> `install` and `replace` are planned and then refuse, because this build carries
-> no reader for `ai-stp-bundle/1` yet. They stay *declared* — the contract
-> requires all five core operations — and the refusal names the real limitation.
->
-> The human command surface is not wired yet; `--help` says what the binary does.
+> **Status: skeleton.** The kernel is implemented and tested. The provider wire
+> surface and the human commands are not yet wired to it, and the binary says so
+> rather than reporting a capability it does not have.
 
 ## What it manages
 
