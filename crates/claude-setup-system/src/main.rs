@@ -17,7 +17,10 @@ use provider_v3::{ComponentKind, ProjectionKind};
 
 /// Everything specific to Claude Code, verified against `claude-baseline.json`.
 pub const CLAUDE: Harness = Harness {
-    harness_id: "claude",
+    // The consumer's closed harness enum spells this `claude-code`, and that
+    // enum is embedded in published corpus artifacts. Ours was not released, so
+    // ours is the one that moves.
+    harness_id: "claude-code",
     provider_id: "claude-setup-system",
     version: env!("CARGO_PKG_VERSION"),
     product: "Claude Code",
