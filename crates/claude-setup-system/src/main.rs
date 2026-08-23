@@ -5,7 +5,7 @@
 //! through `setup-core`, and neither has a shortcut around it.
 //!
 //! This file is the harness's *facts*. Every command over them lives in
-//! [`harness_runtime`], shared with the other four setup systems, so a change to
+//! [`harness_runtime`], shared with every other setup system, so a change to
 //! behaviour lands once and a change to Claude Code's surface lands here.
 //!
 //! Claude Code installs itself, so this provider owns the configuration only.
