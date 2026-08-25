@@ -7,10 +7,15 @@ the whole configuration — not a pointer to somewhere the content really lives.
 That is what makes restore mean something: it returns the instructions, skills,
 agents, commands, hooks, MCP entries and settings together, in one step.
 
-> **Status: complete for the five core operations.** `install`, `replace`,
-> `backup`, `restore` and `remove` all work, over the wire and from the local
-> catalog. The software lifecycle and `launch` are optional in the contract and
-> are not declared, because this build does not perform them.
+> **Status: complete for the five core operations and the program lifecycle.**
+>
+> `install`, `replace`, `backup`, `restore` and `remove` all work, over the wire
+> and from the local catalog. `launch` is optional in the contract and is not
+> declared.
+>
+> The software lifecycle installs the product itself: a plan names the
+> exact bytes offline, whoever holds the network fetches them, and apply
+> verifies and installs with the network gone.
 
 ## Using it
 
@@ -50,7 +55,7 @@ Point `CLAUDE_SETUP_SYSTEM_SETUP_CATALOG` at a directory to use setups of your o
 | Documented configuration home | `~/.claude` |
 | Environment override | `CLAUDE_CONFIG_DIR` |
 | Configuration lifecycle | owned |
-| Program lifecycle | not owned |
+| Program lifecycle | owned |
 
 The configuration home above is documentation. Every mutation takes an explicit
 absolute `--target`; nothing is inferred from a home directory or the working
@@ -142,7 +147,7 @@ release is a convenience, not the authorised copy.
 
 ```bash
 docker run --rm -v "$HOME/.config:/config" \
-  ghcr.io/nddev-opennetwork/claude-setup-system:0.0.1 \
+  ghcr.io/nddev-opennetwork/claude-setup-system:0.0.2 \
   status --target /config/<dir> --json
 ```
 
