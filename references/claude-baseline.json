@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "product": "Claude Code",
   "verified_against": "Claude Code 2.1.226",
   "official_sources": [
@@ -83,5 +83,50 @@
     "name",
     "owner",
     "plugins"
-  ]
+  ],
+  "software_artifacts": {
+    "command": "claude",
+    "shape": "gzip-tar",
+    "platforms": {
+      "linux/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.245.tgz",
+        "bytes": 119751172,
+        "sha256": "sha256:668662e7b5d91a93cff6c75736e60f3d5d3bed4cbe077ae4feefc63ad1253f4d",
+        "member": "package/claude"
+      },
+      "linux/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.245.tgz",
+        "bytes": 121422431,
+        "sha256": "sha256:310c8bb769c6699458807d25c389dd74bb10c335f17ae1fb7ced73d41fa268a7",
+        "member": "package/claude"
+      },
+      "macos/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.245.tgz",
+        "bytes": 112854859,
+        "sha256": "sha256:d06dafb33a7eb1213a21ab44b14e84391b2c527a49ba6ae1e821b81b5c3f6844",
+        "member": "package/claude"
+      },
+      "macos/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.245.tgz",
+        "bytes": 115662410,
+        "sha256": "sha256:12a8d767d78179cdbf21833e2629a27d256aaf426295b07a54b5993027e76533",
+        "member": "package/claude"
+      },
+      "windows/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.245.tgz",
+        "bytes": 117641036,
+        "sha256": "sha256:c70e0bebfd283869e242715b4348fc9f88e02c3f64068a70b58d9eadbd304348",
+        "member": "package/claude.exe"
+      },
+      "windows/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.245.tgz",
+        "bytes": 121675868,
+        "sha256": "sha256:208e1b9b78e9bd84b0d9d2008e174a550bdbcc4fcff5155925c63cedd5908828",
+        "member": "package/claude.exe"
+      }
+    },
+    "version": "2.1.245",
+    "verified_at": "2026-08-25T13:03:59+00:00"
+  },
+  "verified_at": "2026-08-25T13:03:59+00:00"
 }
