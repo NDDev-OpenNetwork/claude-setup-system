@@ -18,15 +18,19 @@ Never open a public issue for a vulnerability, and never paste credentials,
 tokens, or the contents of a backup slot anywhere in this repository. A backup
 slot holds whatever the target held when it was captured.
 
-## What is not supported
+## What this build does, and what it does not
 
 The software lifecycle — installing, updating and removing the product
 itself — is declared and does work. `plan` names the exact bytes offline,
 whoever holds the network fetches them, and `apply` verifies and installs
 with the network gone.
 
-`launch` is optional in the provider contract and is not declared here. A
-provider that advertised an operation it cannot perform would let a caller ask
+`launch` is declared. It starts the exact executable a software install
+placed under `--prefix`, never a name found on `PATH`, and points the
+product at `--target` through the environment variable its own
+documentation names.
+
+A provider that advertised an operation it cannot perform would let a caller ask
 for something that cannot be honoured, which is worse than not offering it.
 
 All five core operations do work: `backup`, `restore`, `remove`, `install` and

@@ -10,12 +10,15 @@ agents, commands, hooks, MCP entries and settings together, in one step.
 > **Status: complete for the five core operations and the program lifecycle.**
 >
 > `install`, `replace`, `backup`, `restore` and `remove` all work, over the wire
-> and from the local catalog. `launch` is optional in the contract and is not
-> declared.
+> and from the local catalog.
 >
 > The software lifecycle installs the product itself: a plan names the
 > exact bytes offline, whoever holds the network fetches them, and apply
 > verifies and installs with the network gone.
+>
+> `launch` starts the exact executable that install placed, never a name
+> found on `PATH`, and points the product at the target through the
+> environment variable its own documentation names.
 
 ## Using it
 
@@ -72,7 +75,8 @@ where the capability is declared. The vocabulary is owned by
 `SHA256SUMS`.
 
 **Human.** `list`, `status`, `install`, `reinstall`, `select`, `backups`,
-`restore [--backup <ref>]`, `remove`, `diff`.
+`restore [--backup <ref>]`, `remove`, `diff`, and `adopt` where a target may
+still carry a stamp from the estate that came before this one.
 
 Both go through `crates/setup-core`. A human command that reached the target
 directly would bypass the guarantees the wire surface owes its consumer, so it

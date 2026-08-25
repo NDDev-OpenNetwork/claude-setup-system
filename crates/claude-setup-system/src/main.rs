@@ -31,6 +31,7 @@ pub const CLAUDE: Harness = Harness {
     config_home_env: "CLAUDE_CONFIG_DIR",
     control_directory: ".claude-setup-system",
     state_file: "NDDEV-CLAUDE-PROVIDER.json",
+    predecessor_state_file: "NDDEV-CLAUDE-SETUP.json",
     profile_id: "claude/native-and-marketplace/1",
     // Everything outside this list is a sibling overlay preserved verbatim.
     native_namespaces: &[
