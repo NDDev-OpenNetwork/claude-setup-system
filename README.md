@@ -127,6 +127,18 @@ release's own `SHA256SUMS`, and places it at a predictable path: `~/.local/bin`
 on Linux and macOS, `%LOCALAPPDATA%\Programs` on Windows. Neither needs
 privilege and neither registers anything anywhere.
 
+Somewhere else instead:
+
+```bash
+CLAUDE_INSTALL_DIR=/opt/claude-setup-system sh install.sh
+```
+
+The same variable on both scripts, and it is `CLAUDE_INSTALL_DIR`
+rather than the longer prefix the setup-catalog variable uses -- the installer
+is named after the product, not after the crate. It was always accepted and
+never written down here, which is how someone reading only this page installs
+into a home directory they did not mean to write to.
+
 Releases carry six binaries — Linux, macOS and Windows, on x86_64 and arm64 —
 which is what `provider-info` declares, so the declaration and what you can
 download say the same thing.
@@ -151,7 +163,7 @@ release is a convenience, not the authorised copy.
 
 ```bash
 docker run --rm -v "$HOME/.config:/config" \
-  ghcr.io/nddev-opennetwork/claude-setup-system:0.0.5 \
+  ghcr.io/nddev-opennetwork/claude-setup-system:0.0.6 \
   status --target /config/<dir> --json
 ```
 
