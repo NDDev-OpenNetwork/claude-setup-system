@@ -56,7 +56,7 @@ pub const CLAUDE: Harness = Harness {
     // ours to rewrite even though a setup can register a marketplace that fills
     // it; `projects/` is session history; `.credentials.json` is exactly what a
     // backup must never copy.
-    never_touch: &[".credentials.json", "projects", "plugins"],
+    never_touch: &[".credentials.json", "projects", "plugins", ".claude.json"],
     // No near neighbour measured for this product. A marker listed here is a
     // refusal waiting to happen, so nothing is listed without evidence.
     foreign_homes: &[],
@@ -210,11 +210,6 @@ mod tests {
     fn everything_the_baseline_marks_never_touch_is_disclaimed_here() {
         for entry in baseline()["never_touch"].as_array().unwrap() {
             let Some(name) = entry.as_str() else { continue };
-            // `~/.claude.json` sits outside the target and cannot be a top-level
-            // entry of it; the rest must be disclaimed by name.
-            if name.starts_with('~') {
-                continue;
-            }
             assert!(
                 !CLAUDE.native_namespaces.contains(&name),
                 "{name} is marked never_touch by the baseline but claimed as ours"

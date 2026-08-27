@@ -159,11 +159,15 @@ nothing compiles a component to it.
 Everything named here is left exactly as it was found, like any
 other file beside a target.
 
-**`.mcp.json`** -- Claude Code stores MCP servers in ~/.claude.json -- user scope at the top level, local scope under projects[<path>].mcpServers -- and project scope in a .mcp.json at the project root. There is no ~/.claude/.mcp.json. ~/.claude.json is in never_touch, so no MCP surface is ownable inside this target and the kind is not declared. ([source](https://code.claude.com/docs/en/mcp))
+**`.mcp.json`** -- Claude Code stores MCP servers in `.claude.json` -- user scope at the top level, local scope under projects[<path>].mcpServers -- and project scope in a .mcp.json at the project root. There is no .mcp.json under this home. `.claude.json` is in never_touch, so no MCP surface is ownable inside this target and the kind is not declared. ([source](https://code.claude.com/docs/en/mcp))
 
 **`hooks`** -- Hooks are configured under a "hooks" key in settings.json. ~/.claude/hooks/ is a convention for the scripts a hook command points at, not a directory Claude Code reads. It is declared the day a setup here ships hook scripts and not before. ([source](https://code.claude.com/docs/en/hooks))
 
 **`plugins`** -- Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data. Held in never_touch: a plugin component projects through settings.json, which this provider does own. ([source](https://code.claude.com/docs/en/plugin-marketplaces))
+
+**`.claude.json`** -- Observed, not documented: with CLAUDE_CONFIG_DIR pointing at a target, the product writes this file *inside* that home rather than beside it -- measured 2026-08-28 by installing Claude Code through this provider's own software lifecycle and running `mcp add --scope user` through `launch`. It carries user-scope MCP servers, account state and project history, which the product rewrites on its own schedule. Disclaimed rather than owned: owning it would promise a rollback of an account record. ([source](measured through launch; no vendor page states the path under a redirected home))
+
+**`backups`** -- The product's own backup directory, created beside the file it backs up when `mcp add` rewrites `.claude.json`. Measured 2026-08-28. Distinct from this provider's slots, which live under its control directory. ([source](measured through launch; no vendor page names it))
 
 ## Response
 
