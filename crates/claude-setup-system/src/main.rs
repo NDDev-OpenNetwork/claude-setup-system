@@ -35,13 +35,23 @@ pub const CLAUDE: Harness = Harness {
     profile_id: "claude/native-and-marketplace/1",
     // Everything outside this list is a sibling overlay preserved verbatim.
     // Each entry is a surface `references/claude-baseline.json` sources. The
-    // two that were here and are not documented are in that file's
-    // `declined` list with the page that decided it: `.mcp.json`, because
-    // Claude Code keeps MCP servers in `~/.claude.json` and nothing reads a
-    // `.mcp.json` under this home; and `hooks`, because hooks are a key of
-    // `settings.json` and `~/.claude/hooks/` is only where the scripts a
-    // hook command names conventionally sit.
-    native_namespaces: &["CLAUDE.md", "settings.json", "skills", "agents", "commands"],
+    // two that were here and are not documented are in that file's `declined`
+    // list with the page that decided it: `.mcp.json`, because Claude Code keeps
+    // MCP servers in `~/.claude.json` and nothing reads a `.mcp.json` under this
+    // home; and `hooks`, because hooks are a key of `settings.json` and
+    // `~/.claude/hooks/` is only where the scripts a hook command names
+    // conventionally sit.
+    //
+    // `rules` is the one that was missing: user-level rules apply to every
+    // project on the machine, and a setup could not carry one.
+    native_namespaces: &[
+        "CLAUDE.md",
+        "settings.json",
+        "skills",
+        "agents",
+        "commands",
+        "rules",
+    ],
     // The product's own. `plugins/` is the Claude CLI's registry and cache, not
     // ours to rewrite even though a setup can register a marketplace that fills
     // it; `projects/` is session history; `.credentials.json` is exactly what a
@@ -323,6 +333,31 @@ mod tests {
         };
         let catalog = harness_runtime::Catalog::at(&root);
         let problems = harness_runtime::catalog::asymmetric(&catalog.list().unwrap());
+        assert!(problems.is_empty(), "{}", problems.join("\n  "));
+    }
+    /// Nothing this setup ships tells a reader to run something that is not here.
+    ///
+    /// A setup carries documents an agent reads and acts on -- a skill, a rule,
+    /// a command file -- and nothing was checking them. One shipped
+    /// `software-status --target <dir> --json` and `list --json` for six
+    /// releases; the binary refuses both, and says so in those words.
+    ///
+    /// Two refusals: a name belonging to the frozen estate, and any line naming
+    /// this provider followed by a verb `into_command` does not accept. English
+    /// is not judged -- `install` in a sentence is a word, and only
+    /// `<provider> install` is an instruction.
+    #[test]
+    fn nothing_this_harness_ships_names_a_command_it_refuses() {
+        let manifest = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let root = manifest.join("../../setups").join(TOOL);
+        let root = if root.is_dir() {
+            root
+        } else {
+            manifest.join("../../setups")
+        };
+        let catalog = harness_runtime::Catalog::at(&root);
+        let problems =
+            harness_runtime::catalog::misdirecting(HARNESS.provider_id, &catalog.list().unwrap());
         assert!(problems.is_empty(), "{}", problems.join("\n  "));
     }
 }
