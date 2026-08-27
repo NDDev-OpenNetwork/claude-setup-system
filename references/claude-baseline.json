@@ -129,6 +129,13 @@
         ],
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/slash-commands"
+      },
+      {
+        "path": "rules",
+        "kinds": [],
+        "shape": "directory",
+        "source": "https://code.claude.com/docs/en/memory",
+        "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how"
       }
     ],
     "declined": [
