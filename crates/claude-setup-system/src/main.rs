@@ -48,6 +48,9 @@ pub const CLAUDE: Harness = Harness {
     // it; `projects/` is session history; `.credentials.json` is exactly what a
     // backup must never copy.
     never_touch: &[".credentials.json", "projects", "plugins"],
+    // No near neighbour measured for this product. A marker listed here is a
+    // refusal waiting to happen, so nothing is listed without evidence.
+    foreign_homes: &[],
     permission_profiles: &["default"],
     component_kinds: &[
         ComponentKind::Instruction,
