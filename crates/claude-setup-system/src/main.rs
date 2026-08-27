@@ -34,15 +34,14 @@ pub const CLAUDE: Harness = Harness {
     predecessor_state_file: "NDDEV-CLAUDE-SETUP.json",
     profile_id: "claude/native-and-marketplace/1",
     // Everything outside this list is a sibling overlay preserved verbatim.
-    native_namespaces: &[
-        "CLAUDE.md",
-        "settings.json",
-        "skills",
-        "agents",
-        "commands",
-        "hooks",
-        ".mcp.json",
-    ],
+    // Each entry is a surface `references/claude-baseline.json` sources. The
+    // two that were here and are not documented are in that file's
+    // `declined` list with the page that decided it: `.mcp.json`, because
+    // Claude Code keeps MCP servers in `~/.claude.json` and nothing reads a
+    // `.mcp.json` under this home; and `hooks`, because hooks are a key of
+    // `settings.json` and `~/.claude/hooks/` is only where the scripts a
+    // hook command names conventionally sit.
+    native_namespaces: &["CLAUDE.md", "settings.json", "skills", "agents", "commands"],
     // The product's own. `plugins/` is the Claude CLI's registry and cache, not
     // ours to rewrite even though a setup can register a marketplace that fills
     // it; `projects/` is session history; `.credentials.json` is exactly what a
@@ -52,13 +51,18 @@ pub const CLAUDE: Harness = Harness {
     // refusal waiting to happen, so nothing is listed without evidence.
     foreign_homes: &[],
     permission_profiles: &["default"],
+    // A plugin reaches Claude Code through `settings.json` -- `enabledPlugins`
+    // and `extraKnownMarketplaces` -- rather than through a directory, which
+    // is why `plugins` is disclaimed below and `Plugin` is declared here.
+    //
+    // `Mcp` and `Hook` were declared and are not: neither has a surface this
+    // provider can own, so both were promises of a rollback nothing could
+    // keep.
     component_kinds: &[
         ComponentKind::Instruction,
         ComponentKind::Skill,
         ComponentKind::Agent,
         ComponentKind::Command,
-        ComponentKind::Hook,
-        ComponentKind::Mcp,
         ComponentKind::Plugin,
         ComponentKind::Setting,
     ],
@@ -67,6 +71,12 @@ pub const CLAUDE: Harness = Harness {
         ProjectionKind::Marketplace,
         ProjectionKind::Plugin,
     ],
+    // One scope. Claude Code keeps a project copy of every surface, but under `.claude/`
+    // in the workspace rather than under this target -- a different root, not a
+    // second scope of this one.
+    //
+    // Empty rather than absent: a harness that owns one target says so.
+    scoped_projections: &[],
     max_files: 8192,
     max_bytes: 64 * 1024 * 1024,
     kit_identity: include_str!("../../../provider-kit/v3/KIT-IDENTITY.json"),
@@ -237,5 +247,82 @@ mod tests {
                 "{name} is claimed and disclaimed"
             );
         }
+    }
+    /// Everything this harness claims to own, against the vendor page that
+    /// decided it.
+    ///
+    /// What this replaced only checked that the baseline parsed. The block it
+    /// reads now is hand-authored beside the rest of the baseline, and this is
+    /// what keeps that block from being decoration: a namespace no vendor
+    /// document names, or a declared kind no owned surface routes, is red here.
+    ///
+    /// Both directions, because the defect it was written for ran both ways --
+    /// `~/.cursor/rules` was owned and does not exist, `~/.pi/agent/prompts`
+    /// exists and was not owned. Conformance caught neither: its
+    /// `declared_native_route_is_compilable` case asks for **one** route, not
+    /// every one.
+    #[test]
+    fn every_surface_this_harness_owns_is_one_the_vendor_documents() {
+        let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../references")
+            .join(format!("{TOOL}-baseline.json"));
+        let baseline: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(&path).unwrap()).unwrap();
+        let problems = harness_runtime::surfaces::disagreements(&HARNESS, &baseline);
+        assert!(
+            problems.is_empty(),
+            "the declaration and {TOOL}-baseline.json disagree:\n  {}",
+            problems.join("\n  ")
+        );
+    }
+    /// A setup that writes a configuration file says where its format came from.
+    ///
+    /// The release before this one made the *surfaces* sourced: a path this
+    /// provider owns cites the page that documents it. This is the same rule
+    /// one level down, and it was written because two of the seven failed it.
+    ///
+    /// opencode's baseline set `"permission": "ask"` where the product
+    /// documents an object of tool names, and antigravity's set
+    /// `toolPermissions` where the product reads `toolPermission` with four
+    /// values, none of them the one written. Both were valid JSON in the right
+    /// file at the right path. Both installed, verified and restored cleanly.
+    /// Neither changed anything about the product — a target that looks
+    /// configured and is not, which is the failure this estate refuses one
+    /// level up and had been shipping one level down.
+    #[test]
+    fn a_setup_that_writes_configuration_says_where_its_format_came_from() {
+        let manifest = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let root = manifest.join("../../setups").join(TOOL);
+        let root = if root.is_dir() {
+            root
+        } else {
+            manifest.join("../../setups")
+        };
+        let catalog = harness_runtime::Catalog::at(&root);
+        let problems = harness_runtime::catalog::unsourced(&catalog.list().unwrap());
+        assert!(problems.is_empty(), "{}", problems.join("\n  "));
+    }
+    /// Three postures, on every one of the seven.
+    ///
+    /// `baseline` is a working floor, `minimal` is the product's own defaults,
+    /// and `full-auto` asks nothing and sandboxes nothing. A caller who learns
+    /// them on one product knows them on all seven, which is the whole reason
+    /// the names are the estate's rather than each harness's.
+    ///
+    /// The second half of the check is the one worth having: two setups with
+    /// the same bytes mean one of them is a posture in name only, and it would
+    /// still read as offered in `list`.
+    #[test]
+    fn the_three_postures_are_offered_and_are_actually_different() {
+        let manifest = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+        let root = manifest.join("../../setups").join(TOOL);
+        let root = if root.is_dir() {
+            root
+        } else {
+            manifest.join("../../setups")
+        };
+        let catalog = harness_runtime::Catalog::at(&root);
+        let problems = harness_runtime::catalog::asymmetric(&catalog.list().unwrap());
+        assert!(problems.is_empty(), "{}", problems.join("\n  "));
     }
 }

@@ -84,49 +84,114 @@
     "owner",
     "plugins"
   ],
+  "native_surfaces": {
+    "verified_at": "2026-08-27",
+    "config_home": "~/.claude",
+    "surfaces": [
+      {
+        "path": "CLAUDE.md",
+        "kinds": [
+          "instruction"
+        ],
+        "shape": "file",
+        "source": "https://code.claude.com/docs/en/memory"
+      },
+      {
+        "path": "settings.json",
+        "kinds": [
+          "setting",
+          "plugin"
+        ],
+        "shape": "file",
+        "source": "https://code.claude.com/docs/en/settings",
+        "note": "also the projection surface for a plugin component: enabledPlugins and extraKnownMarketplaces are keys here"
+      },
+      {
+        "path": "skills",
+        "kinds": [
+          "skill"
+        ],
+        "shape": "directory",
+        "source": "https://code.claude.com/docs/en/skills"
+      },
+      {
+        "path": "agents",
+        "kinds": [
+          "agent"
+        ],
+        "shape": "directory",
+        "source": "https://code.claude.com/docs/en/sub-agents"
+      },
+      {
+        "path": "commands",
+        "kinds": [
+          "command"
+        ],
+        "shape": "directory",
+        "source": "https://code.claude.com/docs/en/slash-commands"
+      }
+    ],
+    "declined": [
+      {
+        "path": ".mcp.json",
+        "reason": "Claude Code stores MCP servers in ~/.claude.json -- user scope at the top level, local scope under projects[<path>].mcpServers -- and project scope in a .mcp.json at the project root. There is no ~/.claude/.mcp.json. ~/.claude.json is in never_touch, so no MCP surface is ownable inside this target and the kind is not declared.",
+        "source": "https://code.claude.com/docs/en/mcp"
+      },
+      {
+        "path": "hooks",
+        "reason": "Hooks are configured under a \"hooks\" key in settings.json. ~/.claude/hooks/ is a convention for the scripts a hook command points at, not a directory Claude Code reads. It is declared the day a setup here ships hook scripts and not before.",
+        "source": "https://code.claude.com/docs/en/hooks"
+      },
+      {
+        "path": "plugins",
+        "reason": "Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data. Held in never_touch: a plugin component projects through settings.json, which this provider does own.",
+        "source": "https://code.claude.com/docs/en/plugin-marketplaces"
+      }
+    ]
+  },
   "software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
     "platforms": {
       "linux/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.246.tgz",
-        "bytes": 102056733,
-        "sha256": "sha256:a386085cebf079e71e221f2f44c81bca5597c1b141e7ff0af8c72887aa0a2760",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.247.tgz",
+        "bytes": 102927292,
+        "sha256": "sha256:43384995766bbc35c7b9f5e034d3b010be20d3c4d70b69a1c7cc4fe29caee54b",
         "member": "package/claude"
       },
       "linux/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.246.tgz",
-        "bytes": 101669347,
-        "sha256": "sha256:b428069215944879557d15a2dcb744e0e321bf68a9d2cf84136ff01bd08d1cbe",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.247.tgz",
+        "bytes": 102530150,
+        "sha256": "sha256:c6697aa74f8f6c0a1167fcf800ca976b34b89c0170dead133aead97b1ed18471",
         "member": "package/claude"
       },
       "macos/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.246.tgz",
-        "bytes": 91782350,
-        "sha256": "sha256:17562aca5de7ab2dd4d2b0c584e767835d40d2c61f0cfe7b49bd210cfa0b65e9",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.247.tgz",
+        "bytes": 92617460,
+        "sha256": "sha256:ed87916671cd37b0dbf02329ddcc028a3bb618dc02ce5da0ca986cd0a534ea7d",
         "member": "package/claude"
       },
       "macos/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.246.tgz",
-        "bytes": 95973727,
-        "sha256": "sha256:befbab5dc00bdc7c934dd06944871d2a82e051ee2b1066d9d2581bd86c40eb64",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.247.tgz",
+        "bytes": 96822041,
+        "sha256": "sha256:dcd09a23052c39693490e0834a2c00ee8d19419dc161054f8e81f68d37e8b8c5",
         "member": "package/claude"
       },
       "windows/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.246.tgz",
-        "bytes": 101444797,
-        "sha256": "sha256:c8f684280416838328d94e4ab620c1acc596199495ff4283c1e9cbd7f2aa3f01",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.247.tgz",
+        "bytes": 102325365,
+        "sha256": "sha256:58d0c4e30eada41d027bb5e637c8038ee147563f7cd1a0a5e072164c7bf906a0",
         "member": "package/claude.exe"
       },
       "windows/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.246.tgz",
-        "bytes": 104501830,
-        "sha256": "sha256:13927a0ae8925ab50dbcf682372eab497fe1fad722156ec41bd8658d1ba0e1be",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.247.tgz",
+        "bytes": 105364159,
+        "sha256": "sha256:c18ecaf8648ce5b29671ddec9a12149d5cf97b3f243f7fa35d0613674903dcc5",
         "member": "package/claude.exe"
       }
     },
-    "version": "2.1.246",
-    "verified_at": "2026-08-26T22:54:59+00:00"
+    "version": "2.1.247",
+    "verified_at": "2026-08-27T14:56:04+00:00"
   },
-  "verified_at": "2026-08-26T22:54:59+00:00"
+  "verified_at": "2026-08-27T14:56:04+00:00"
 }

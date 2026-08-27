@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "full-auto",
+  "description": "Full auto: nothing is asked and nothing is sandboxed. `permissions.defaultMode` is bypassPermissions and Bash sandboxing is off.",
+  "sources": [
+    "https://code.claude.com/docs/en/settings-reference",
+    "https://code.claude.com/docs/en/permission-modes",
+    "https://code.claude.com/docs/en/sandboxing"
+  ]
+}

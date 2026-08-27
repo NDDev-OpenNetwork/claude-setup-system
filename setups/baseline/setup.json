@@ -1,5 +1,9 @@
 {
   "schema_version": 1,
   "id": "baseline",
-  "description": "A working floor: instructions plus conservative settings."
+  "description": "A working floor: instructions plus a conservative permission rule.",
+  "sources": [
+    "https://code.claude.com/docs/en/settings",
+    "https://code.claude.com/docs/en/permissions"
+  ]
 }
