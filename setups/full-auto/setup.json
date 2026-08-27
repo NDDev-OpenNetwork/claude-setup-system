@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "full-auto",
-  "description": "Full auto: nothing is asked and nothing is sandboxed. `permissions.defaultMode` is bypassPermissions and Bash sandboxing is off.",
+  "description": "Full auto: nothing is asked and nothing is sandboxed. `permissions.defaultMode` is bypassPermissions and Bash sandboxing is off. This is a setup posture -- keys in this product's own configuration file. It is not an execution profile and it grants no environment: what it changes is what the product asks you, not what anyone is permitted to run.",
   "sources": [
     "https://code.claude.com/docs/en/settings-reference",
     "https://code.claude.com/docs/en/permission-modes",
