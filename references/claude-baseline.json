@@ -222,5 +222,6 @@
     "version": "2.1.248",
     "verified_at": "2026-08-27T23:41:30+00:00"
   },
-  "verified_at": "2026-08-27T23:41:30+00:00"
+  "verified_at": "2026-08-27T23:41:30+00:00",
+  "setup_catalogue_digest": "sha256:970b10fe9d9d653506a22451605e78b519563501c9aedc6c1e08f5bd8749bb9d"
 }
