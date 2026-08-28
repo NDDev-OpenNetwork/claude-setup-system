@@ -183,45 +183,45 @@
     "shape": "gzip-tar",
     "platforms": {
       "linux/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.248.tgz",
-        "bytes": 95941780,
-        "sha256": "sha256:bd2e2b6ebace34039b073b0f586d521ec09c895fa2a39de8d1c86423ae5884ca",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.250.tgz",
+        "bytes": 95938811,
+        "sha256": "sha256:7ee8b8d4d3eda2da01b8a376ce42e229480b1faca76708d553d938df36b160c5",
         "member": "package/claude"
       },
       "linux/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.248.tgz",
-        "bytes": 95519947,
-        "sha256": "sha256:9477cc891be320ee6648ca2fcf9f1083b0b42d89e7387394e8aa9bd9e9d089d0",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.250.tgz",
+        "bytes": 95519792,
+        "sha256": "sha256:a17a63df5de33b974745b4237ba8e9693525ecfd0f19c54c8187b8209be9db8e",
         "member": "package/claude"
       },
       "macos/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.248.tgz",
-        "bytes": 85581717,
-        "sha256": "sha256:9954690a182ca67e571a19b20f72873bea34f4173b3221473117608f7b73e72d",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.250.tgz",
+        "bytes": 85581770,
+        "sha256": "sha256:f95962e0b881dd1f215fa6a63cd653f3f21a85015695eeccdfbdb8e49afc29cf",
         "member": "package/claude"
       },
       "macos/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.248.tgz",
-        "bytes": 89553924,
-        "sha256": "sha256:4cb0929f6d2ab21961277245f01d17b95e6286d7ad8c9574e4561e03334a6ad4",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.250.tgz",
+        "bytes": 89561735,
+        "sha256": "sha256:7442aa06b759e126b0dda11270a196e84feda971d4a485b6d71cc5890b587d83",
         "member": "package/claude"
       },
       "windows/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.248.tgz",
-        "bytes": 95357135,
-        "sha256": "sha256:c0683ba1de56e8051285ae41df89a0350b4ead56844ef8bdb0b033e4d81515ed",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.250.tgz",
+        "bytes": 95361743,
+        "sha256": "sha256:85b9cebe62ade82e28402741114cdde716bbe219ac9e3f20af1b123e94916cff",
         "member": "package/claude.exe"
       },
       "windows/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.248.tgz",
-        "bytes": 98396411,
-        "sha256": "sha256:8fdd91ac60e849e15875cfd0bb34562303780e486835c6757cfe3407b4c09d91",
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.250.tgz",
+        "bytes": 98400997,
+        "sha256": "sha256:9a750be6099e0ac8039757eb102a9619b8f70baed3ba5a6933a82ea433e2d65f",
         "member": "package/claude.exe"
       }
     },
-    "version": "2.1.248",
-    "verified_at": "2026-08-27T23:41:30+00:00"
+    "version": "2.1.250",
+    "verified_at": "2026-08-28T03:40:44+00:00"
   },
-  "verified_at": "2026-08-27T23:41:30+00:00",
+  "verified_at": "2026-08-28T03:40:44+00:00",
   "setup_catalogue_digest": "sha256:970b10fe9d9d653506a22451605e78b519563501c9aedc6c1e08f5bd8749bb9d"
 }
