@@ -20,15 +20,15 @@ Strict JSON. Comment support is an open feature request against the vendor (`ant
 
 ## Owned surfaces
 
-| path | kinds | shape |
-|---|---|---|
-| `CLAUDE.md` | instruction | file |
-| `settings.json` | setting | file |
-| `skills` | skill | directory |
-| `agents` | agent | directory |
-| `commands` | command | directory |
-| `rules` | *(routes no kind)* | directory |
-| `workflows` | *(routes no kind)* | directory |
+| path | kinds | shape | decided by |
+|---|---|---|---|
+| `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> |
+| `settings.json` | setting | file | <https://code.claude.com/docs/en/settings> |
+| `skills` | skill | directory | <https://code.claude.com/docs/en/skills> |
+| `agents` | agent | directory | <https://code.claude.com/docs/en/sub-agents> |
+| `commands` | command | directory | <https://code.claude.com/docs/en/slash-commands> |
+| `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> |
+| `workflows` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/claude-directory> |
 
 A surface that routes no kind is owned deliberately: a backup captures
 it and a restore returns it, and no component is routed there because
