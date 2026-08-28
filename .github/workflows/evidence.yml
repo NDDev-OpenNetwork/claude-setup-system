@@ -57,4 +57,4 @@ jobs:
           suffix=""
           [ "$RUNNER_OS" = "Windows" ] && suffix=".exe"
           exe="target/release/claude-setup-system$suffix"
-          "$py" scripts/evidence.py --binary "$exe" --harness claude --writes-absent "mcp add --scope user writes .claude.json, which is in never_touch -- account state, not a surface this build restores"
+          "$py" scripts/evidence.py --binary "$exe" --harness claude --writes-absent "mcp add --scope user writes .claude.json, which is in never_touch -- account state, not a surface this build restores" --probe-absent "claude config answers Not logged in - Please run /login"
