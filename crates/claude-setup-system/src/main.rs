@@ -29,6 +29,8 @@ pub const CLAUDE: Harness = Harness {
     vendor: "Anthropic",
     documented_config_home: "~/.claude",
     config_home_env: "CLAUDE_CONFIG_DIR",
+    // One home, one variable: nothing here is conditional.
+    config_home_note: "",
     control_directory: ".claude-setup-system",
     state_file: "NDDEV-CLAUDE-PROVIDER.json",
     predecessor_state_file: "NDDEV-CLAUDE-SETUP.json",
