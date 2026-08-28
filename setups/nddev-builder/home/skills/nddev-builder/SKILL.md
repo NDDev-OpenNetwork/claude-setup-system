@@ -31,6 +31,9 @@ target-explicit, reversible, and backed by the repository's own gate.
 - **What this harness owns, declines, and why** — `references/surfaces.md`
 - **The commands, the invariants, and the software half** — `references/lifecycle.md`
 - **The gate, the render check, and the one rule** — `references/validation.md`
+- **Writing a skill this harness will actually load** — `references/authoring-skills.md`
+- **Writing an agent this harness will actually load** — `references/authoring-agents.md`
+- **Writing a command this harness will actually load** — `references/authoring-commands.md`
 
 ## Boundaries
 
