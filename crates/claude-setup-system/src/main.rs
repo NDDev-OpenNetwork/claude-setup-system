@@ -51,6 +51,11 @@ pub const CLAUDE: Harness = Harness {
         "agents",
         "commands",
         "rules",
+        // Added 2026-08-28. The vendor calls a script saved here *just for
+        // you*, and it runs as a `/<name>` command. Owned so a backup captures
+        // it; routing nothing, because `command` already routes to `commands`
+        // and one kind on two surfaces makes a consumer's route ambiguous.
+        "workflows",
     ],
     // The product's own. `plugins/` is the Claude CLI's registry and cache, not
     // ours to rewrite even though a setup can register a marketplace that fills
@@ -61,19 +66,34 @@ pub const CLAUDE: Harness = Harness {
     // refusal waiting to happen, so nothing is listed without evidence.
     foreign_homes: &[],
     permission_profiles: &["default"],
-    // A plugin reaches Claude Code through `settings.json` -- `enabledPlugins`
-    // and `extraKnownMarketplaces` -- rather than through a directory, which
-    // is why `plugins` is disclaimed below and `Plugin` is declared here.
-    //
     // `Mcp` and `Hook` were declared and are not: neither has a surface this
     // provider can own, so both were promises of a rollback nothing could
     // keep.
+    //
+    // **`Plugin` joins them, and it is the same defect one step further along.**
+    // A plugin reaches Claude Code through `settings.json` -- `enabledPlugins`
+    // and `extraKnownMarketplaces` -- rather than through a directory, so the
+    // kind was routed to a file. Unlike `Mcp` and `Hook` it *had* a surface,
+    // which is what made it look sound.
+    //
+    // What it lacked was the semantics. Measured: `write_bundle_files` calls
+    // `remove_managed` and then writes the bundle's bytes verbatim. There is no
+    // merge, no key handling, no kind-specific behaviour anywhere in this
+    // build. So a `plugin` component carrying `settings.json` would replace the
+    // whole file -- and, because the removal runs first, delete `CLAUDE.md`,
+    // `skills`, `agents`, `commands` and `rules` on the way in.
+    //
+    // It is also the only kind across all seven that routes to a file rather
+    // than a directory, which is the shape that should have prompted the
+    // question. The consumer stopped at exactly this row rather than guess the
+    // semantics, and was right to. One unreachable capability, correctly
+    // reported, is a smaller lie than a route that compiles into the wrong
+    // thing. Declaring it again means building settings-merge first.
     component_kinds: &[
         ComponentKind::Instruction,
         ComponentKind::Skill,
         ComponentKind::Agent,
         ComponentKind::Command,
-        ComponentKind::Plugin,
         ComponentKind::Setting,
     ],
     projection_kinds: &[
