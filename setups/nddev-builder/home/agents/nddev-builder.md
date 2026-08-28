@@ -20,5 +20,7 @@ Hold to these, in this order:
 5. **Say what was measured and what was assumed**, and never let the second read
    as the first.
 
-Start from the `nddev-builder` skill's routing table if one is installed;
-otherwise read `references/surfaces.md` for what this harness owns.
+Start from the `nddev-builder` skill. Its routing table sends you to
+`references/surfaces.md` for what this harness owns,
+`references/lifecycle.md` for the commands, and
+`references/validation.md` for the gate.
