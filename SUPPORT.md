@@ -200,6 +200,20 @@ other file beside a target.
 
 **`session-runtime-state`** -- One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration. ([source](measured from the pinned 2.1.250 binary's path literals))
 
+**`managed-settings`** -- Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.
+
+  * Linux — `/etc/claude-code/managed-settings.json`
+  * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`
+  * Windows — `%ProgramData%\\ClaudeCode\\managed-settings.json`
+
+All three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**."*
+
+**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.
+
+That is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.
+
+**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given. ([source](path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference))
+
 ## Response
 
 One maintainer. Defects are triaged as time allows; security reports are
