@@ -94,8 +94,9 @@
           "instruction"
         ],
         "shape": "file",
-        "source": "https://code.claude.com/docs/en/memory",
-        "evidence": "page"
+        "source": "https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/CLAUDE.md` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "settings.json",
@@ -103,9 +104,9 @@
           "setting"
         ],
         "shape": "file",
-        "source": "https://code.claude.com/docs/en/settings",
-        "evidence": "page",
-        "note": "The `plugin` kind was routed here too, and is withdrawn. `enabledPlugins` and `extraKnownMarketplaces` are keys in this file, so a plugin does reach Claude Code through it -- but this provider has no merge semantics: `write_bundle_files` calls `remove_managed` and then writes a bundle's bytes verbatim. A `plugin` component carrying `settings.json` would replace the whole file and, because the removal runs first, delete `CLAUDE.md`, `skills`, `agents`, `commands` and `rules` on the way in. It was the only kind across all seven routed to a file rather than a directory, which is the shape that should have prompted the question. Declaring it again means building settings-merge first."
+        "source": "https://code.claude.com/docs/en/settings; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "The `plugin` kind was routed here too, and is withdrawn. `enabledPlugins` and `extraKnownMarketplaces` are keys in this file, so a plugin does reach Claude Code through it -- but this provider has no merge semantics: `write_bundle_files` calls `remove_managed` and then writes a bundle's bytes verbatim. A `plugin` component carrying `settings.json` would replace the whole file and, because the removal runs first, delete `CLAUDE.md`, `skills`, `agents`, `commands` and `rules` on the way in. It was the only kind across all seven routed to a file rather than a directory, which is the shape that should have prompted the question. Declaring it again means building settings-merge first. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/settings.json` as a literal, 89 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "skills",
@@ -113,9 +114,9 @@
           "skill"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/skills",
-        "evidence": "page",
-        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them."
+        "source": "https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/skills` as a literal, 51 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "agents",
@@ -123,8 +124,9 @@
           "agent"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/sub-agents",
-        "evidence": "page"
+        "source": "https://code.claude.com/docs/en/sub-agents; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/agents` as a literal, 20 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "commands",
@@ -132,16 +134,17 @@
           "command"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/slash-commands",
-        "evidence": "page"
+        "source": "https://code.claude.com/docs/en/slash-commands; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/commands` as a literal, 8 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "rules",
         "kinds": [],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/memory",
-        "evidence": "page",
-        "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how"
+        "source": "https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact",
+        "evidence": "bytes",
+        "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/rules` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "workflows",
@@ -215,7 +218,7 @@
       },
       {
         "path": "managed-settings",
-        "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux — `/etc/claude-code/managed-settings.json`\n  * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows — `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json`\n\nAll three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
+        "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux \u2014 `/etc/claude-code/managed-settings.json`\n  * macOS \u2014 `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows \u2014 `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json`\n\nAll three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads \u2014 and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
         "source": "path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference"
       }
     ],
@@ -231,6 +234,52 @@
     }
   },
   "software_artifacts": {
+    "command": "claude",
+    "shape": "gzip-tar",
+    "platforms": {
+      "linux/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.251.tgz",
+        "bytes": 95743772,
+        "sha256": "sha256:50760f283bf289a8bfb6f25ab86276808fd038b8f724ba5eaffb9b195483846d",
+        "member": "package/claude"
+      },
+      "linux/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.251.tgz",
+        "bytes": 95323995,
+        "sha256": "sha256:7e2d6d13baccd64cd2d9a8781643ae23a48db009ad746d1df0cfec38d5ed0a44",
+        "member": "package/claude"
+      },
+      "macos/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.251.tgz",
+        "bytes": 85356126,
+        "sha256": "sha256:cb3ecffa649ea20b78f3b7fe4a7395d7a225a510ae18521f6b65c669ecf4d9fd",
+        "member": "package/claude"
+      },
+      "macos/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.251.tgz",
+        "bytes": 89288269,
+        "sha256": "sha256:fed11267c112c48a250e05c865c2b238a5933408910ca8f5ee3ffad864f2aefb",
+        "member": "package/claude"
+      },
+      "windows/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.251.tgz",
+        "bytes": 95159400,
+        "sha256": "sha256:d6e430c9636f387849f59b88d002326c19d2550a3ae4cb4243d67850bacd755f",
+        "member": "package/claude.exe"
+      },
+      "windows/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.251.tgz",
+        "bytes": 98194588,
+        "sha256": "sha256:e58a24f9c90ffee8241d618405c9aedc2f51c2dc6c30fa3d2c204823b066015a",
+        "member": "package/claude.exe"
+      }
+    },
+    "version": "2.1.251",
+    "verified_at": "2026-08-28T21:39:00+00:00"
+  },
+  "verified_at": "2026-08-28T21:39:00+00:00",
+  "setup_catalogue_digest": "sha256:3153c02864916597d692edbf9c53c0c1b2dce1f02973f80d10feba4c07cac58e",
+  "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
     "platforms": {
@@ -273,7 +322,5 @@
     },
     "version": "2.1.250",
     "verified_at": "2026-08-28T04:38:52+00:00"
-  },
-  "verified_at": "2026-08-28T04:38:52+00:00",
-  "setup_catalogue_digest": "sha256:f0352ec23639cb557577468db5e59b9b0506fa7d348e1ca884226bcd9c8ee211"
+  }
 }

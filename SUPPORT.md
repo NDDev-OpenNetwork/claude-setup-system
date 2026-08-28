@@ -160,12 +160,12 @@ Configuration home as the product documents it: `~/.claude`.
 
 | Path | Component kinds routed here | Decided by |
 | --- | --- | --- |
-| `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory) |
-| `settings.json` | `setting` | [source](https://code.claude.com/docs/en/settings) |
-| `skills` | `skill` | [source](https://code.claude.com/docs/en/skills) |
-| `agents` | `agent` | [source](https://code.claude.com/docs/en/sub-agents) |
-| `commands` | `command` | [source](https://code.claude.com/docs/en/slash-commands) |
-| `rules` | -- | [source](https://code.claude.com/docs/en/memory) |
+| `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
+| `settings.json` | `setting` | [source](https://code.claude.com/docs/en/settings; path literal read from the pinned 2.1.251 artifact) |
+| `skills` | `skill` | [source](https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact) |
+| `agents` | `agent` | [source](https://code.claude.com/docs/en/sub-agents; path literal read from the pinned 2.1.251 artifact) |
+| `commands` | `command` | [source](https://code.claude.com/docs/en/slash-commands; path literal read from the pinned 2.1.251 artifact) |
+| `rules` | -- | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
 | `workflows` | -- | [source](https://code.claude.com/docs/en/claude-directory; measured in the pinned 2.1.250 binary) |
 
 A path routing no component kind is owned so a setup can carry it;
