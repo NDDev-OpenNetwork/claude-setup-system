@@ -94,7 +94,8 @@
           "instruction"
         ],
         "shape": "file",
-        "source": "https://code.claude.com/docs/en/memory"
+        "source": "https://code.claude.com/docs/en/memory",
+        "evidence": "page"
       },
       {
         "path": "settings.json",
@@ -103,6 +104,7 @@
         ],
         "shape": "file",
         "source": "https://code.claude.com/docs/en/settings",
+        "evidence": "page",
         "note": "The `plugin` kind was routed here too, and is withdrawn. `enabledPlugins` and `extraKnownMarketplaces` are keys in this file, so a plugin does reach Claude Code through it -- but this provider has no merge semantics: `write_bundle_files` calls `remove_managed` and then writes a bundle's bytes verbatim. A `plugin` component carrying `settings.json` would replace the whole file and, because the removal runs first, delete `CLAUDE.md`, `skills`, `agents`, `commands` and `rules` on the way in. It was the only kind across all seven routed to a file rather than a directory, which is the shape that should have prompted the question. Declaring it again means building settings-merge first."
       },
       {
@@ -112,6 +114,7 @@
         ],
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/skills",
+        "evidence": "page",
         "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them."
       },
       {
@@ -120,7 +123,8 @@
           "agent"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/sub-agents"
+        "source": "https://code.claude.com/docs/en/sub-agents",
+        "evidence": "page"
       },
       {
         "path": "commands",
@@ -128,13 +132,15 @@
           "command"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/slash-commands"
+        "source": "https://code.claude.com/docs/en/slash-commands",
+        "evidence": "page"
       },
       {
         "path": "rules",
         "kinds": [],
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/memory",
+        "evidence": "page",
         "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how"
       },
       {
@@ -142,6 +148,7 @@
         "kinds": [],
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/claude-directory; measured in the pinned 2.1.250 binary",
+        "evidence": "bytes",
         "note": "Personal workflow scripts. The vendor: a script saved to `~/.claude/workflows/` is *just for you*, in contrast to a `.claude/workflows/` shared in a repository, and it *runs as a `/<name>` command*. The binary carries `.claude/workflows/` without a `~`, which is why the root took a page to settle -- the audit had called it global on the strength of the literal alone and was corrected before anything was built on it.\n\nOwned from 2026-08-28 so a backup captures it. **Routing no kind**, for the reason grok's `rules` row gives: `command` already routes to the owned `commands`, and one kind on two surfaces makes a consumer's route ambiguous -- the surfaces guard refuses it by name. Both are real, both are user-level, and which a `command` component should reach waits on the per-kind route the consumer is building."
       }
     ],
@@ -268,5 +275,5 @@
     "verified_at": "2026-08-28T04:38:52+00:00"
   },
   "verified_at": "2026-08-28T04:38:52+00:00",
-  "setup_catalogue_digest": "sha256:119c692637ad31e10828615d81d4cd9e8d40e11753640513ba74ce1f3952f0ac"
+  "setup_catalogue_digest": "sha256:742f45d570dbda7ff4fde7d6e356997efb358f0c660d5b28360ba4edbe80e2cf"
 }
