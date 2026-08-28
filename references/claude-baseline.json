@@ -112,7 +112,8 @@
           "skill"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/skills"
+        "source": "https://code.claude.com/docs/en/skills",
+        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them."
       },
       {
         "path": "agents",
