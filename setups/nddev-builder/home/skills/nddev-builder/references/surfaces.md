@@ -22,17 +22,17 @@ Strict JSON. Comment support is an open feature request against the vendor (`ant
 
 | path | kinds | shape | decided by | exercised by |
 |---|---|---|---|---|
-| `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> | *nothing — a page* |
-| `settings.json` | setting | file | <https://code.claude.com/docs/en/settings> | *nothing — a page* |
-| `skills` | skill | directory | <https://code.claude.com/docs/en/skills> | *nothing — a page* |
-| `agents` | agent | directory | <https://code.claude.com/docs/en/sub-agents> | *nothing — a page* |
-| `commands` | command | directory | <https://code.claude.com/docs/en/slash-commands> | *nothing — a page* |
-| `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> | *nothing — a page* |
+| `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> | read its bytes |
+| `settings.json` | setting | file | <https://code.claude.com/docs/en/settings> | read its bytes |
+| `skills` | skill | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
+| `agents` | agent | directory | <https://code.claude.com/docs/en/sub-agents> | read its bytes |
+| `commands` | command | directory | <https://code.claude.com/docs/en/slash-commands> | read its bytes |
+| `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> | read its bytes |
 | `workflows` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/claude-directory> | read its bytes |
 
 **A citation is not a measurement.** `decided by` says where a row came from; `exercised by` says whether anybody made the product demonstrate it. Where a row records no method the answer is a page and nothing else, because absence of a record of measurement is not evidence of measurement.
 
-Here that is **0 run**, **1 read from the product's own bytes**, and **6 resting on a page alone**. The last number is the one worth acting on: a row in it is not wrong, it is untested, and the two are indistinguishable from here.
+Here that is **0 run**, **7 read from the product's own bytes**, and **0 resting on a page alone**. The last number is the one worth acting on: a row in it is not wrong, it is untested, and the two are indistinguishable from here.
 
 A surface that routes no kind is owned deliberately: a backup captures
 it and a restore returns it, and no component is routed there because
