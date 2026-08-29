@@ -91,12 +91,34 @@ pub const CLAUDE: Harness = Harness {
     // semantics, and was right to. One unreachable capability, correctly
     // reported, is a smaller lie than a route that compiles into the wrong
     // thing. Declaring it again means building settings-merge first.
+    // `Plugin` is here because of a mechanism that needs no plugins directory.
+    //
+    // The product's own reference: *"Any folder under a skills directory that
+    // contains a `.claude-plugin/plugin.json` manifest is loaded as a plugin
+    // named `<name>@skills-dir` on the next session, with no marketplace and no
+    // install step."* At personal scope that skills directory is
+    // `~/.claude/skills/`, which this provider already owns, and the reference's
+    // own table distinguishes the two by manifest alone: `foo/SKILL.md` with no
+    // manifest is a skill named `foo`, `foo/.claude-plugin/plugin.json` is a
+    // plugin `foo@skills-dir`.
+    //
+    // So `skills` routes two kinds, and that is the product's design rather
+    // than a compromise here. `plugins/` stays declined: it holds the cache a
+    // marketplace install copies into, which is product state.
+    //
+    // The reason this was blank until 2026-08-29 is worth keeping. The record
+    // said a plugin *projects through settings.json*, which was true of
+    // enabling one and was never the whole question -- and the skills-directory
+    // mechanism needs neither settings key nor marketplace. A negative taken
+    // from the pages that happened to be read, exactly like `command` and
+    // `instruction` on the harness two doors down.
     component_kinds: &[
         ComponentKind::Instruction,
         ComponentKind::Skill,
         ComponentKind::Agent,
         ComponentKind::Command,
         ComponentKind::Setting,
+        ComponentKind::Plugin,
     ],
     projection_kinds: &[
         ProjectionKind::NativeFiles,

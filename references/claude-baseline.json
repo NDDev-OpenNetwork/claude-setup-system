@@ -111,12 +111,13 @@
       {
         "path": "skills",
         "kinds": [
-          "skill"
+          "skill",
+          "plugin"
         ],
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/skills` as a literal, 51 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
+        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/skills` as a literal, 51 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.\n\n**Two kinds, and the product distinguishes them by manifest.** Its own reference: *\"Any folder under a skills directory that contains a `.claude-plugin/plugin.json` manifest is loaded as a plugin named `<name>@skills-dir` on the next session, with no marketplace and no install step.\"* Its table gives all three shapes: `<skills-dir>/foo/SKILL.md` with no manifest is a skill `foo`; `<skills-dir>/foo/.claude-plugin/plugin.json` is a plugin `foo@skills-dir` that can bundle its own skills, agents and hooks; `<plugin>/skills/bar/SKILL.md` is a skill packaged inside a plugin. The scope table names `~/.claude/skills/` as **personal**, loading *in every project*, with the workspace trust gate applying only to the project-scope directory.\n\n`plugin` was undeclared here until 2026-08-29 on the reasoning that a plugin projects through `settings.json` -- true of *enabling* one, and never the whole question. This mechanism needs no settings key, no marketplace and no install."
       },
       {
         "path": "agents",
@@ -168,7 +169,7 @@
       },
       {
         "path": "plugins",
-        "reason": "Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data. Held in never_touch: a plugin component projects through settings.json, which this provider does own.",
+        "reason": "Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data -- the state a marketplace install copies into. Held in never_touch for that reason, and it is product state rather than a surface a provider writes.\n\n**This is no longer the reason the `plugin` kind is undeclared, because it is declared.** The old text ended *a plugin component projects through settings.json, which this provider does own* -- true of enabling a plugin, and it hid a second mechanism entirely. A folder under `skills/` carrying `.claude-plugin/plugin.json` loads as `<name>@skills-dir` with no marketplace, no install step and no settings key, so `skills` routes `plugin` and this directory still routes nothing. Corrected 2026-08-29 against the product's own plugins reference.",
         "source": "https://code.claude.com/docs/en/plugin-marketplaces"
       },
       {
@@ -278,7 +279,7 @@
     "verified_at": "2026-08-29T08:17:16+00:00"
   },
   "verified_at": "2026-08-29T08:17:16+00:00",
-  "setup_catalogue_digest": "sha256:f339e0983a740e794495df79a57c816641ef5d42defa565240bfae8484b31646",
+  "setup_catalogue_digest": "sha256:5ae73cd7679fc6eb5186947b52a4f7a7ec72fea95835a3b297cc9fa7e9b705b5",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
