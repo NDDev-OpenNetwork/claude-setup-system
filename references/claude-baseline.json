@@ -232,6 +232,10 @@
       "note": "Strict JSON. Comment support is an open feature request against the vendor (`anthropics/claude-code` #12688, #17968, #29370) and is not implemented, so a `//` in this file is a parse error rather than a stylistic choice. The schema is SchemaStore's rather than the vendor's own, and `tools/validate_setup_schemas.py` fetches and checks against it.",
       "measured_at": "2026-08-28",
       "schema": "https://json.schemastore.org/claude-code-settings.json"
+    },
+    "projection_basis": {
+      "marketplace": "settings.json",
+      "plugin": "skills"
     }
   },
   "software_artifacts": {
