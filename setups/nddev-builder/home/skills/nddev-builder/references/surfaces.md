@@ -24,7 +24,7 @@ Strict JSON. Comment support is an open feature request against the vendor (`ant
 |---|---|---|---|---|
 | `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> | read its bytes |
 | `settings.json` | setting | file | <https://code.claude.com/docs/en/settings> | read its bytes |
-| `skills` | skill | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
+| `skills` | skill, plugin | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
 | `agents` | agent | directory | <https://code.claude.com/docs/en/sub-agents> | read its bytes |
 | `commands` | command | directory | <https://code.claude.com/docs/en/slash-commands> | read its bytes |
 | `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> | read its bytes |
@@ -46,7 +46,7 @@ surfaces makes a consumer's route ambiguous, and the guard in
 
 - **`.mcp.json`** — Claude Code stores MCP servers in `.claude.json` -- user scope at the top level, local scope under projects[<path>].mcpServers -- and project scope in a .mcp.json at the project root. There is no .mcp.json under this home. `.claude.json` is in never_touch, so no MCP surface is ownable inside this target and the kind is not declared.
 - **`hooks`** — Hooks are configured under a "hooks" key in settings.json. ~/.claude/hooks/ is a convention for the scripts a hook command points at, not a directory Claude Code reads. It is declared the day a setup here ships hook scripts and not before.
-- **`plugins`** — Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data. Held in never_touch: a plugin component projects through settings.json, which this provider does own.
+- **`plugins`** — Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data -- the state a marketplace install copies into. Held in never_touch for that reason, and it is product state rather than a surface a provider writes.
 - **`.claude.json`** — Observed, not documented: with CLAUDE_CONFIG_DIR pointing at a target, the product writes this file *inside* that home rather than beside it -- measured 2026-08-28 by installing Claude Code through this provider's own software lifecycle and running `mcp add --scope user` through `launch`. It carries user-scope MCP servers, account state and project history, which the product rewrites on its own schedule. Disclaimed rather than owned: owning it would promise a rollback of an account record.
 - **`backups`** — The product's own backup directory, created beside the file it backs up when `mcp add` rewrites `.claude.json`. Measured 2026-08-28. Distinct from this provider's slots, which live under its control directory.
 - **`NDDEV-CLAUDE-PROVIDER.json`** — This provider's own state file: which setup is applied, the identity it recorded, and which slot reverses the last operation. Written by every operation and excluded from target identity, because counting it would leave a target different from the identity the operation just wrote. Not a projection surface and never ownable as one.

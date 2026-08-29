@@ -168,7 +168,7 @@ Configuration home as the product documents it: `~/.claude`.
 | --- | --- | --- |
 | `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
 | `settings.json` | `setting` | [source](https://code.claude.com/docs/en/settings; path literal read from the pinned 2.1.251 artifact) |
-| `skills` | `skill` | [source](https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact) |
+| `skills` | `skill`, `plugin` | [source](https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact) |
 | `agents` | `agent` | [source](https://code.claude.com/docs/en/sub-agents; path literal read from the pinned 2.1.251 artifact) |
 | `commands` | `command` | [source](https://code.claude.com/docs/en/slash-commands; path literal read from the pinned 2.1.251 artifact) |
 | `rules` | -- | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
@@ -186,7 +186,9 @@ other file beside a target.
 
 **`hooks`** -- Hooks are configured under a "hooks" key in settings.json. ~/.claude/hooks/ is a convention for the scripts a hook command points at, not a directory Claude Code reads. It is declared the day a setup here ships hook scripts and not before. ([source](https://code.claude.com/docs/en/hooks))
 
-**`plugins`** -- Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data. Held in never_touch: a plugin component projects through settings.json, which this provider does own. ([source](https://code.claude.com/docs/en/plugin-marketplaces))
+**`plugins`** -- Claude Code owns plugins/known_marketplaces.json, plugins/marketplaces, plugins/cache and plugins/data -- the state a marketplace install copies into. Held in never_touch for that reason, and it is product state rather than a surface a provider writes.
+
+**This is no longer the reason the `plugin` kind is undeclared, because it is declared.** The old text ended *a plugin component projects through settings.json, which this provider does own* -- true of enabling a plugin, and it hid a second mechanism entirely. A folder under `skills/` carrying `.claude-plugin/plugin.json` loads as `<name>@skills-dir` with no marketplace, no install step and no settings key, so `skills` routes `plugin` and this directory still routes nothing. Corrected 2026-08-29 against the product's own plugins reference. ([source](https://code.claude.com/docs/en/plugin-marketplaces))
 
 **`.claude.json`** -- Observed, not documented: with CLAUDE_CONFIG_DIR pointing at a target, the product writes this file *inside* that home rather than beside it -- measured 2026-08-28 by installing Claude Code through this provider's own software lifecycle and running `mcp add --scope user` through `launch`. It carries user-scope MCP servers, account state and project history, which the product rewrites on its own schedule. Disclaimed rather than owned: owning it would promise a rollback of an account record. ([source](measured through launch; no vendor page states the path under a redirected home))
 
