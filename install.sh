@@ -14,7 +14,7 @@ set -eu
 
 REPO="NDDev-OpenNetwork/claude-setup-system"
 BINARY="claude-setup-system"
-VERSION="${1:-0.0.25}"
+VERSION="${1:-0.0.26}"
 PREFIX="${CLAUDE_INSTALL_DIR:-$HOME/.local/bin}"
 
 case "$(uname -s)" in
