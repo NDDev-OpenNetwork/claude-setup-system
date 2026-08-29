@@ -75,14 +75,20 @@ Two versions, two different answers, both measured:
 | --- | --- |
 | `ai-stp-cli` 0.0.3 | five pass; Codex and Antigravity report `conforms=false`, detail *fields differ from the closed v3 schema* |
 | `ai-stp-cli` 0.0.7 | six pass 23 of 23; Codex reports `conforms=false`, detail *a scoped projection profile names an unknown target scope* |
+| `ai-stp-cli` 0.0.8 | **all seven pass**, 27 to 29 cases each |
 
-The remaining one is not a defect in this build. `0.0.7` carries the field but
-its scope enum is `["project"]` alone, while the provider kit this program
-vendors and verifies byte-for-byte -- kit `0.2.4`,
-`provider-info.schema.json` -- gives `["project", "user_root"]`. The kit is the
-artifact a provider is told to build against, so a build that declares
-`user_root` is right by the document it was handed and wrong by the checker
-shipped beside it. Raised with the consumer, who owns both.
+The middle row was never a defect in this build, and the third row is how that
+was settled: **it closed with no change on this side.** `0.0.7` carried the
+field but its scope enum was `["project"]` alone, while the provider kit this
+program vendors and verifies byte-for-byte gave `["project", "user_root"]`. The
+kit is the artifact a provider is told to build against, so a build declaring
+`user_root` was right by the document it was handed and wrong by the checker
+shipped beside it. `0.0.8` shipped the enum, and a declaration that had been
+correct for a month started being read as correct.
+
+**Withdrawing a correct declaration to make a lagging instrument print green is
+never the answer here.** The three rows above are the argument for that, and
+they are also the argument for the rule this section exists for.
 
 Which is the general rule this section exists for: **check the version of the
 checker before suspecting this build**, and prefer the newest, because an older
