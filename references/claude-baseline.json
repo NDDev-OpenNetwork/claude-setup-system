@@ -218,7 +218,7 @@
       },
       {
         "path": "managed-settings",
-        "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux \u2014 `/etc/claude-code/managed-settings.json`\n  * macOS \u2014 `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows \u2014 `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json`\n\nAll three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads \u2014 and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
+        "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux — `/etc/claude-code/managed-settings.json`\n  * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows — `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json`\n\nAll three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
         "source": "path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference"
       }
     ],
@@ -275,10 +275,10 @@
       }
     },
     "version": "2.1.251",
-    "verified_at": "2026-08-28T21:39:00+00:00"
+    "verified_at": "2026-08-29T08:17:16+00:00"
   },
-  "verified_at": "2026-08-28T21:39:00+00:00",
-  "setup_catalogue_digest": "sha256:3153c02864916597d692edbf9c53c0c1b2dce1f02973f80d10feba4c07cac58e",
+  "verified_at": "2026-08-29T08:17:16+00:00",
+  "setup_catalogue_digest": "sha256:f339e0983a740e794495df79a57c816641ef5d42defa565240bfae8484b31646",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
