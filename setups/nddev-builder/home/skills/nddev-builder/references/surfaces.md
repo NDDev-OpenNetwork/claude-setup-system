@@ -26,7 +26,7 @@ Strict JSON. Comment support is an open feature request against the vendor (`ant
 | `settings.json` | setting | file | <https://code.claude.com/docs/en/settings> | read its bytes |
 | `skills` | skill, plugin | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
 | `agents` | agent | directory | <https://code.claude.com/docs/en/sub-agents> | read its bytes |
-| `commands` | command | directory | <https://code.claude.com/docs/en/slash-commands> | read its bytes |
+| `commands` | command | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
 | `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> | read its bytes |
 | `workflows` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/claude-directory> | read its bytes |
 
