@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "baseline",
-  "description": "A working floor: instructions plus a conservative permission rule.",
+  "description": "A working floor: instructions plus a conservative permission rule. The rule denies the Read tool on `./.env` and `./.env.*`, and that is exactly what it bounds -- measured in the pinned 2.1.251 artifact, whose own prompt text says each rule names a tool and warns the model against routing around one by switching tools. A shell command, a hook or an MCP server is a different route and this rule does not close it. The product's filesystem boundary is a separate mechanism, `sandbox.denyReadPaths`, which this posture does not set.",
   "sources": [
     "https://code.claude.com/docs/en/settings",
     "https://code.claude.com/docs/en/permissions"

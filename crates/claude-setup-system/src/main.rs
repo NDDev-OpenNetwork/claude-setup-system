@@ -37,6 +37,12 @@ pub const CLAUDE: Harness = Harness {
     vendor: "Anthropic",
     documented_config_home: "~/.claude",
     config_home_env: "CLAUDE_CONFIG_DIR",
+    // Measured 2026-08-30 in the pinned 2.1.251 artifact: `DISABLE_UPDATES` nine
+    // times, beside `DISABLE_AUTOUPDATER` and `DISABLE_UPGRADE_COMMAND`. The
+    // vendor documents the first as the one that stops manual updates too, which
+    // is the one that matters: an autoupdater switched off still leaves `claude
+    // update` able to replace the bytes this provider pinned.
+    updates_off_env: "DISABLE_UPDATES",
     // One home, one variable: nothing here is conditional.
     config_home_note: "",
     control_directory: ".claude-setup-system",

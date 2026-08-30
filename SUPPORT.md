@@ -212,9 +212,28 @@ other file beside a target.
 
   * Linux — `/etc/claude-code/managed-settings.json`
   * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`
-  * Windows — `%ProgramData%\\ClaudeCode\\managed-settings.json`
+  * Windows — the `HKLM SOFTWARE/Policies/ClaudeCode` registry key, and `C:/Program Files/ClaudeCode/managed-settings.json`
 
-All three are path literals in the pinned product. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**."*
+**The Windows line was `%ProgramData%\\ClaudeCode\\managed-settings.json` until 2026-08-30, and the sentence beside all three said they were path literals in the pinned product. Re-measured at 2.1.251, none of the three is.** Asked of both shipped artifacts -- `claude-code-linux-x64` and `claude-code-win32-x64`, each digest-checked against this baseline's own table before extracting:
+
+```
+                                                        win  linux
+  /etc/claude-code/managed-settings.json                  0     0
+  /Library/Application Support/ClaudeCode/managed-...     0     0
+  ProgramData\\ClaudeCode\\managed-settings.json          0     0
+  Program Files/ClaudeCode/managed-settings.json          1     1
+  SOFTWARE/Policies/ClaudeCode                            1     1
+  /etc/nddev-invented/managed-settings.json               0     0   (control)
+  NddevInvented/ClaudeCode/managed-settings.json          0     0   (control)
+```
+
+The controls return zero, so the search discriminates. The three per-OS paths are joined at runtime -- the bytes carry `f(r,"managed-settings.json")` and `zt(iR,"managed-settings.json")` rather than any assembled form -- which is why every runtime-joined path in this record reads `page` and why a literal search cannot confirm one. **What the bytes do carry is one sentence naming the Windows pair**, and it is the only place in either artifact where a managed-settings path appears assembled:
+
+> *"the HKLM SOFTWARE/Policies/ClaudeCode registry key or C:/Program Files/ClaudeCode/managed-settings.json — WSL reads managed settings from the full Windows policy chain (HKLM, C:/Program Files/ClaudeCode via DrvFs, HKCU)"*
+
+So the old Windows value was wrong and its replacement is measured rather than read off a page. `ProgramData` does occur in these bytes, four times, and none is about this product's policy: a sandbox base-named-objects list, a trust-CA helper, and an Azure agent token path. A grep that stopped at the bare word would have confirmed the wrong answer.
+
+**And one thing neither the old record nor the review had.** That sentence documents `wslInheritsWindowsSettings`: with it set in an admin-only Windows source, a WSL process reads the **Windows** policy chain rather than the Linux one. WSL is therefore not simply a Linux host for this product's policy layer, and a record that treats it as one answers the wrong question for a machine where that switch is on. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**."*
 
 **It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.
 
