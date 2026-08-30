@@ -22,7 +22,7 @@ use std::process::ExitCode;
 
 mod software;
 
-use harness_runtime::Harness;
+use harness_runtime::{Harness, LaunchBinding};
 use provider_v3::{ComponentKind, ProjectionKind};
 
 /// Everything specific to Claude Code, verified against `claude-baseline.json`.
@@ -37,6 +37,12 @@ pub const CLAUDE: Harness = Harness {
     vendor: "Anthropic",
     documented_config_home: "~/.claude",
     config_home_env: "CLAUDE_CONFIG_DIR",
+    // Measured 2026-08-28 by making the product write: `mcp add --scope user`
+    // under this variable wrote `<target>/.claude.json`, so the home follows it
+    // rather than one file inside it.
+    launch_binding: LaunchBinding::Complete {
+        how: "measured by making the product write its own configuration into the target",
+    },
     // Measured 2026-08-30 in the pinned 2.1.251 artifact: `DISABLE_UPDATES` nine
     // times, beside `DISABLE_AUTOUPDATER` and `DISABLE_UPGRADE_COMMAND`. The
     // vendor documents the first as the one that stops manual updates too, which
