@@ -40,7 +40,7 @@ Generated from the same rows as the section above, for every harness in this est
 
 | field | `claude` | `grok` | `opencode` | `antigravity` |
 |---|---|---|---|---|
-| `name` | **required** | — | — | **required** |
+| `name` | **required** | — | yes | **required** |
 | `description` | **required** | — | **required** | **required** |
 | `tools` | yes | — | yes | yes |
 | `disallowedTools` | yes | — | — | — |

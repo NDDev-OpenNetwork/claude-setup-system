@@ -83,6 +83,10 @@ pub const CLAUDE: Harness = Harness {
     // ours to rewrite even though a setup can register a marketplace that fills
     // it; `projects/` is session history; `.credentials.json` is exactly what a
     // backup must never copy.
+    // Nothing measured. This product's alternate spellings, if it has
+    // any, have not been asked for -- empty here says nobody looked,
+    // not that the product reads one name.
+    shadowing_names: &[],
     never_touch: &[".credentials.json", "projects", "plugins", ".claude.json"],
     // No near neighbour measured for this product. A marker listed here is a
     // refusal waiting to happen, so nothing is listed without evidence.
