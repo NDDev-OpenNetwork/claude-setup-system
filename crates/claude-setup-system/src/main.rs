@@ -8,7 +8,15 @@
 //! [`harness_runtime`], shared with every other setup system, so a change to
 //! behaviour lands once and a change to Claude Code's surface lands here.
 //!
-//! Claude Code installs itself, so this provider owns the configuration only.
+//! This provider owns the configuration *and* the program: `src/software.rs`
+//! carries the artifacts Anthropic publishes, and the software operations take
+//! a `--prefix` for the program distinct from the `--target` that holds its
+//! configuration.
+//!
+//! This line used to say *"Claude Code installs itself, so this provider owns
+//! the configuration only"*. That was the owner's original assignment rather
+//! than what the build does, and `7d156c2` made it false without editing it
+//! here.
 
 use std::process::ExitCode;
 
