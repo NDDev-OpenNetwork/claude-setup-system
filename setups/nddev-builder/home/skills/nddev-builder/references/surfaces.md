@@ -42,7 +42,7 @@ surfaces makes a consumer's route ambiguous, and the guard in
 
 ## Considered and not owned
 
-13 rows. Each records what was searched, so the next reader does not repeat the search:
+14 rows. Each records what was searched, so the next reader does not repeat the search:
 
 - **`.mcp.json`** — Claude Code stores MCP servers in `.claude.json` -- user scope at the top level, local scope under projects[<path>].mcpServers -- and project scope in a .mcp.json at the project root. There is no .mcp.json under this home. `.claude.json` is in never_touch, so no MCP surface is ownable inside this target and the kind is not declared.
 - **`hooks`** — Hooks are configured under a "hooks" key in settings.json. ~/.claude/hooks/ is a convention for the scripts a hook command points at, not a directory Claude Code reads. It is declared the day a setup here ships hook scripts and not before.
@@ -57,3 +57,4 @@ surfaces makes a consumer's route ambiguous, and the guard in
 - **`local`** — An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable.
 - **`session-runtime-state`** — One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration.
 - **`managed-settings`** — Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.
+- **`$HOME/.agents/skills`** — The shared cross-product skills convention, and **this is the one harness of the seven that does not read it**. Recorded because six of the seven declare `scoped_projection_profiles` for `user_root` and this one declares none, and an unexplained absence on a page reads exactly like an oversight.

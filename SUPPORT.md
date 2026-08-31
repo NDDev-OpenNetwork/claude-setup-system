@@ -166,13 +166,13 @@ Configuration home as the product documents it: `~/.claude`.
 
 | Path | Component kinds routed here | Decided by |
 | --- | --- | --- |
-| `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
-| `settings.json` | `setting` | [source](https://code.claude.com/docs/en/settings; path literal read from the pinned 2.1.251 artifact) |
-| `skills` | `skill`, `plugin` | [source](https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact) |
-| `agents` | `agent` | [source](https://code.claude.com/docs/en/sub-agents; path literal read from the pinned 2.1.251 artifact) |
-| `commands` | `command` | [source](https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact) |
-| `rules` | -- | [source](https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact) |
-| `workflows` | -- | [source](https://code.claude.com/docs/en/claude-directory; measured in the 2.1.250 binary) |
+| `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory) -- path literal read from the pinned 2.1.251 artifact |
+| `settings.json` | `setting` | [source](https://code.claude.com/docs/en/settings) -- path literal read from the pinned 2.1.251 artifact |
+| `skills` | `skill`, `plugin` | [source](https://code.claude.com/docs/en/skills) -- path literal read from the pinned 2.1.251 artifact |
+| `agents` | `agent` | [source](https://code.claude.com/docs/en/sub-agents) -- path literal read from the pinned 2.1.251 artifact |
+| `commands` | `command` | [source](https://code.claude.com/docs/en/skills) -- path literal read from the pinned 2.1.251 artifact |
+| `rules` | -- | [source](https://code.claude.com/docs/en/memory) -- path literal read from the pinned 2.1.251 artifact |
+| `workflows` | -- | [source](https://code.claude.com/docs/en/claude-directory) -- measured in the 2.1.250 binary |
 
 A path routing no component kind is owned so a setup can carry it;
 nothing compiles a component to it.
@@ -190,23 +190,23 @@ other file beside a target.
 
 **This is no longer the reason the `plugin` kind is undeclared, because it is declared.** The old text ended *a plugin component projects through settings.json, which this provider does own* -- true of enabling a plugin, and it hid a second mechanism entirely. A folder under `skills/` carrying `.claude-plugin/plugin.json` loads as `<name>@skills-dir` with no marketplace, no install step and no settings key, so `skills` routes `plugin` and this directory still routes nothing. Corrected 2026-08-29 against the product's own plugins reference. ([source](https://code.claude.com/docs/en/plugin-marketplaces))
 
-**`.claude.json`** -- Observed, not documented: with CLAUDE_CONFIG_DIR pointing at a target, the product writes this file *inside* that home rather than beside it -- measured 2026-08-28 by installing Claude Code through this provider's own software lifecycle and running `mcp add --scope user` through `launch`. It carries user-scope MCP servers, account state and project history, which the product rewrites on its own schedule. Disclaimed rather than owned: owning it would promise a rollback of an account record. ([source](measured through launch; no vendor page states the path under a redirected home))
+**`.claude.json`** -- Observed, not documented: with CLAUDE_CONFIG_DIR pointing at a target, the product writes this file *inside* that home rather than beside it -- measured 2026-08-28 by installing Claude Code through this provider's own software lifecycle and running `mcp add --scope user` through `launch`. It carries user-scope MCP servers, account state and project history, which the product rewrites on its own schedule. Disclaimed rather than owned: owning it would promise a rollback of an account record. (measured through launch; no vendor page states the path under a redirected home)
 
-**`backups`** -- The product's own backup directory, created beside the file it backs up when `mcp add` rewrites `.claude.json`. Measured 2026-08-28. Distinct from this provider's slots, which live under its control directory. ([source](measured through launch; no vendor page names it))
+**`backups`** -- The product's own backup directory, created beside the file it backs up when `mcp add` rewrites `.claude.json`. Measured 2026-08-28. Distinct from this provider's slots, which live under its control directory. (measured through launch; no vendor page names it)
 
-**`NDDEV-CLAUDE-PROVIDER.json`** -- This provider's own state file: which setup is applied, the identity it recorded, and which slot reverses the last operation. Written by every operation and excluded from target identity, because counting it would leave a target different from the identity the operation just wrote. Not a projection surface and never ownable as one. ([source](this provider's own contract; no vendor page is involved))
+**`NDDEV-CLAUDE-PROVIDER.json`** -- This provider's own state file: which setup is applied, the identity it recorded, and which slot reverses the last operation. Written by every operation and excluded from target identity, because counting it would leave a target different from the identity the operation just wrote. Not a projection surface and never ownable as one. (this provider's own contract; no vendor page is involved)
 
-**`.claude-setup-system`** -- This provider's own control directory: the target lock, the backup slots and their payloads. Kept out of the declaration for the same reason as the state file, and recorded here because the declined list is where a reader looks before opening a file to find out what it is. ([source](this provider's own contract; no vendor page is involved))
+**`.claude-setup-system`** -- This provider's own control directory: the target lock, the backup slots and their payloads. Kept out of the declaration for the same reason as the state file, and recorded here because the declined list is where a reader looks before opening a file to find out what it is. (this provider's own contract; no vendor page is involved)
 
-**`keybindings.json`** -- A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question. ([source](measured from the 2.1.250 binary's path literals))
+**`keybindings.json`** -- A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question. (measured from the 2.1.250 binary's path literals)
 
-**`statusline-command.sh`** -- A shell script the product runs to render its status line, with a PowerShell sibling `statusline.ps1`. Configuration in the sense that a person chooses it, and never ownable by this provider: a setup that wrote an executable a product runs is a setup that runs code on somebody's machine. ([source](measured from the 2.1.250 binary's path literals))
+**`statusline-command.sh`** -- A shell script the product runs to render its status line, with a PowerShell sibling `statusline.ps1`. Configuration in the sense that a person chooses it, and never ownable by this provider: a setup that wrote an executable a product runs is a setup that runs code on somebody's machine. (measured from the 2.1.250 binary's path literals)
 
-**`agent-runtime-state`** -- One row for the agent subtree beside the owned `agents`: `agent-registry.json`, `agent-memory/<agentType>/` and `agent-memory-local/<agentType>/`. What an agent has learned and which are registered, both the product's lifetime rather than a setup's. ([source](measured from the 2.1.250 binary's path literals))
+**`agent-runtime-state`** -- One row for the agent subtree beside the owned `agents`: `agent-registry.json`, `agent-memory/<agentType>/` and `agent-memory-local/<agentType>/`. What an agent has learned and which are registered, both the product's lifetime rather than a setup's. (measured from the 2.1.250 binary's path literals)
 
-**`local`** -- An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable. ([source](measured from the 2.1.250 binary's path literals))
+**`local`** -- An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable. (measured from the 2.1.250 binary's path literals)
 
-**`session-runtime-state`** -- One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration. ([source](measured from the 2.1.250 binary's path literals))
+**`session-runtime-state`** -- One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration. (measured from the 2.1.250 binary's path literals)
 
 **`managed-settings`** -- Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.
 
@@ -239,7 +239,13 @@ So the old Windows value was wrong and its replacement is measured rather than r
 
 That is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.
 
-**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given. ([source](path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference))
+**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given. (path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference)
+
+**`$HOME/.agents/skills`** -- The shared cross-product skills convention, and **this is the one harness of the seven that does not read it**. Recorded because six of the seven declare `scoped_projection_profiles` for `user_root` and this one declares none, and an unexplained absence on a page reads exactly like an oversight.
+
+Measured 2026-08-31 in the pinned artifact, digest checked against this baseline's own table before a byte was read: `.agents/skills` appears **zero** times and `.agents/` zero times, while `.claude/skills` appears 66 times, `.claude/agents` 22 and `.claude/plugins` 9 -- so the search discriminates inside this product. The discriminating control is a sibling rather than an invented string: the same search over pi 0.84.4 returns `.agents/skills` 21 times and over opencode 1.18.25 once, and both of those declare the scope. A negative is worth what its control is worth, and here the control is another vendor answering yes to the identical question.
+
+So there is nothing to own: a scope declared for a directory this product never opens would be the same false statement as a namespace nobody can source. Re-ask when the pin moves. (measured in claude-code-linux-x64-2.1.251.tgz, with pi 0.84.4 and opencode 1.18.25 as controls)
 
 ## Response
 
