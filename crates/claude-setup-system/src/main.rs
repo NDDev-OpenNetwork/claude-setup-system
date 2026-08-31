@@ -87,6 +87,12 @@ pub const CLAUDE: Harness = Harness {
     // any, have not been asked for -- empty here says nobody looked,
     // not that the product reads one name.
     shadowing_names: &[],
+    // Owned, and nothing this build can install ever lands here: no
+    // component kind routes to them and no setup in this catalogue
+    // carries files there. So a posture selecting itself must not empty
+    // them -- every posture agrees there is nothing, which makes the
+    // emptiness a statement none of them made.
+    custody_namespaces: &["rules", "workflows"],
     never_touch: &[".credentials.json", "projects", "plugins", ".claude.json"],
     // No near neighbour measured for this product. A marker listed here is a
     // refusal waiting to happen, so nothing is listed without evidence.

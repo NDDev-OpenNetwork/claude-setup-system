@@ -282,7 +282,7 @@
     "verified_at": "2026-08-29T08:17:16+00:00"
   },
   "verified_at": "2026-08-29T08:17:16+00:00",
-  "setup_catalogue_digest": "sha256:515a9936c7b64d3d50c4775821ba1c93540b79ab0bba16a72b9fd7f94207e3b2",
+  "setup_catalogue_digest": "sha256:9820c375e40ebbcfc39d11adfafac09537ce68db00f36257a78d36cbd70a3536",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
@@ -351,5 +351,11 @@
       "linux-arm64-musl"
     ],
     "note": "**The vendor ships musl builds and this table pins none.** Read from the registry's own `optionalDependencies` for 2.1.251 rather than from a page: eight platform packages, of which `linux-x64-musl` and `linux-arm64-musl` have no row here. On a musl system `artifact_for(\"linux\", \"x86_64\")` answers with the glibc build, which is a false statement about capability.\n\n**How far it actually reaches is narrower than that, and the measurement is the reason.** This provider's own released binary is glibc-linked: the 0.0.40 asset `claude-setup-system-x86_64-unknown-linux-gnu` reads as *dynamically linked, interpreter `/lib64/ld-linux-x86-64.so.2`*, `NEEDED libc.so.6`, and there is no musl asset. So on Alpine this program does not start, and nobody can reach the wrong answer through it. The path that reaches it is a provider built from source against a musl target -- then it runs, and then it hands back a product artifact that will not.\n\n**Which fixes the order.** Adding musl rows to this table alone would publish an answer nobody can ask for. A musl provider build has to come with them, or before them.\n\n**And there is nowhere in the contract to say it.** Measured by the consumer at this protocol version: `provider-info.schema.json` requires `supported_os` and `supported_arch` and carries no libc anywhere. Both are open arrays of free strings, so a spelling like `linux-musl` would *validate* and still not work -- the consumer builds its match key as `f\"{os}/{arch}\"` and splits on exactly one `/`, and there is no third axis to split into. So no spelling is invented here. This is a v3 vocabulary extension when it comes, and until it does the honest state is a recorded gap rather than a platform string nobody parses."
-  }
+  },
+  "source_verified_runtime_flags": [
+    "DISABLE_AUTOUPDATER",
+    "DISABLE_UPDATES",
+    "DISABLE_UPGRADE_COMMAND"
+  ],
+  "source_verified_runtime_flags_note": "Read out of the pinned 2.1.251 artifact on 2026-08-31, after its digest was checked against the artifact table: `DISABLE_UPDATES` nine times, `DISABLE_AUTOUPDATER` eleven, `DISABLE_UPGRADE_COMMAND` four, and an invented name zero, so the search discriminates.\n\n**This block did not exist until now, and launch has set `DISABLE_UPDATES` since 0.0.42.** The measurement was written in the declaration's own comment, which is a claim about method with the method a git archaeology away -- the same defect as a total without its root. `the_switch_it_sets_was_measured` reads this list for every harness that forces a switch, and it caught this one the first time it ran.\n\n`DISABLE_UPDATES` is the one set, because the vendor documents it as stopping manual updates too: an autoupdater switched off still leaves `claude update` able to replace the bytes this provider pinned."
 }
