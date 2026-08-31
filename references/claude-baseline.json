@@ -84,7 +84,7 @@
     "plugins"
   ],
   "native_surfaces": {
-    "verified_at": "2026-08-27",
+    "verified_at": "2026-08-31",
     "config_home": "~/.claude",
     "surfaces": [
       {
@@ -152,7 +152,7 @@
         "shape": "directory",
         "source": "https://code.claude.com/docs/en/claude-directory; measured in the 2.1.250 binary",
         "evidence": "bytes",
-        "note": "Personal workflow scripts. The vendor: a script saved to `~/.claude/workflows/` is *just for you*, in contrast to a `.claude/workflows/` shared in a repository, and it *runs as a `/<name>` command*. The binary carries `.claude/workflows/` without a `~`, which is why the root took a page to settle -- the audit had called it global on the strength of the literal alone and was corrected before anything was built on it.\n\nOwned from 2026-08-28 so a backup captures it. **Routing no kind**, for the reason grok's `rules` row gives: `command` already routes to the owned `commands`, and one kind on two surfaces makes a consumer's route ambiguous -- the surfaces guard refuses it by name. Both are real, both are user-level, and which a `command` component should reach waits on the per-kind route the consumer is building.\n\n**Written down 2026-08-30 rather than left implying it is coming, and the consumer's measurement makes the reason stronger than this row put it.** This said one kind on two surfaces leaves a compiler choosing with nothing telling it how. The consumer measured its own lookup: `rule_for(component_type, harness_id)` scans its rule table and returns the **first** match. So a second row for one kind is not ambiguous-and-unresolved -- it is *unreachable, silently*. Nothing would refuse it and nothing would say it was skipped.\n\nThe inverse already works and is in that table: claude's `plugin` and `skill` both project to `skills` -- two kinds sharing one path, two lookups, no collision. One kind on two paths is the direction the lookup cannot express.\n\n**And this is not waiting on a release.** Per-surface selection is not on the consumer's roadmap, and if it arrives it changes the component model rather than the table: a component would have to name its surface, which is a passport field and an architecture decision. So there is no consumer version to re-ask this against. Re-ask when a passport carries a surface name; the consumer will say when one does."
+        "note": "Personal workflow scripts. The vendor: a script saved to `~/.claude/workflows/` is *just for you*, in contrast to a `.claude/workflows/` shared in a repository, and it *runs as a `/<name>` command*. The binary carries `.claude/workflows/` without a `~`, which is why the root took a page to settle -- the audit had called it global on the strength of the literal alone and was corrected before anything was built on it.\n\nOwned from 2026-08-28 so a backup captures it. **Routing no kind**, for the reason grok's `rules` row gives: `command` already routes to the owned `commands`, and one kind on two surfaces makes a consumer's route ambiguous -- the surfaces guard refuses it by name. Both are real, both are user-level, and which a `command` component should reach waits on the per-kind route the consumer is building.\n\n**Written down 2026-08-30 rather than left implying it is coming, and the consumer's measurement makes the reason stronger than this row put it.** This said one kind on two surfaces leaves a compiler choosing with nothing telling it how. The consumer measured its own lookup: `rule_for(component_type, harness_id)` scans its rule table and returns the **first** match. So a second row for one kind is not ambiguous-and-unresolved -- it is *unreachable, silently*. Nothing would refuse it and nothing would say it was skipped.\n\nThe inverse already works and is in that table: claude's `plugin` and `skill` both project to `skills` -- two kinds sharing one path, two lookups, no collision. One kind on two paths is the direction the lookup cannot express.\n\n**And this is not waiting on a release.** Per-surface selection is not on the consumer's roadmap, and if it arrives it changes the component model rather than the table: a component would have to name its surface, which is a passport field and an architecture decision. So there is no consumer version to re-ask this against. Re-ask when a passport carries a surface name; the consumer will say when one does.\n\n**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`.claude/workflows` 4). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
       }
     ],
     "declined": [
@@ -194,32 +194,60 @@
       {
         "path": "keybindings.json",
         "reason": "A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question.",
-        "source": "measured from the 2.1.250 binary's path literals"
+        "source": "measured from the 2.1.250 binary's path literals",
+        "note": "**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`keybindings.json` 41). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
       },
       {
         "path": "statusline-command.sh",
         "reason": "A shell script the product runs to render its status line, with a PowerShell sibling `statusline.ps1`. Configuration in the sense that a person chooses it, and never ownable by this provider: a setup that wrote an executable a product runs is a setup that runs code on somebody's machine.",
-        "source": "measured from the 2.1.250 binary's path literals"
+        "source": "measured from the 2.1.250 binary's path literals",
+        "note": "**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`statusline-command.sh` 1). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
       },
       {
         "path": "agent-runtime-state",
         "reason": "One row for the agent subtree beside the owned `agents`: `agent-registry.json`, `agent-memory/<agentType>/` and `agent-memory-local/<agentType>/`. What an agent has learned and which are registered, both the product's lifetime rather than a setup's.",
-        "source": "measured from the 2.1.250 binary's path literals"
+        "source": "measured from the 2.1.250 binary's path literals",
+        "members": [
+          "agent-registry.json",
+          "agent-memory",
+          "agent-memory-local"
+        ],
+        "note": "**Re-asked at 2.1.251 on 2026-08-31, and the first search said GONE because the needle was this repository's own label.** `agent-runtime-state` is a name given here to one row covering several product paths; the product carries the paths and not the label, so searching for the label returns zero at every version. Every member is present in the pinned artifact (`agent-registry.json` 2, `agent-memory` 48, `agent-memory-local` 13). `members` above exists so the next re-ask searches the subject rather than the label."
       },
       {
         "path": "local",
         "reason": "An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable.",
-        "source": "measured from the 2.1.250 binary's path literals"
+        "source": "measured from the 2.1.250 binary's path literals",
+        "note": "**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`.claude/local` 14). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
       },
       {
         "path": "session-runtime-state",
         "reason": "One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration.",
-        "source": "measured from the 2.1.250 binary's path literals"
+        "source": "measured from the 2.1.250 binary's path literals",
+        "members": [
+          "history.jsonl",
+          "checkpoints",
+          "debug",
+          "daemon.json",
+          "daemon.log",
+          "assistant-daemon-state.json",
+          "jobs",
+          "mailbox",
+          "bash-log.txt",
+          "first-run",
+          "feedback/drafts"
+        ],
+        "note": "**Re-asked at 2.1.251 on 2026-08-31, and the first search said GONE because the needle was this repository's own label.** `session-runtime-state` is a name given here to one row covering several product paths; the product carries the paths and not the label, so searching for the label returns zero at every version. Every member is present in the pinned artifact (`history.jsonl` 15, `checkpoints` 17, `daemon.json` 23, `daemon.log` 13, `assistant-daemon-state.json` 2, `mailbox` 122, `bash-log.txt` 2, `first-run` 6, `feedback/drafts` 4). `members` above exists so the next re-ask searches the subject rather than the label."
       },
       {
         "path": "managed-settings",
         "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux — `/etc/claude-code/managed-settings.json`\n  * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows — the `HKLM SOFTWARE/Policies/ClaudeCode` registry key, and `C:/Program Files/ClaudeCode/managed-settings.json`\n\n**The Windows line was `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json` until 2026-08-30, and the sentence beside all three said they were path literals in the pinned product. Re-measured at 2.1.251, none of the three is.** Asked of both shipped artifacts -- `claude-code-linux-x64` and `claude-code-win32-x64`, each digest-checked against this baseline's own table before extracting:\n\n```\n                                                        win  linux\n  /etc/claude-code/managed-settings.json                  0     0\n  /Library/Application Support/ClaudeCode/managed-...     0     0\n  ProgramData\\\\ClaudeCode\\\\managed-settings.json          0     0\n  Program Files/ClaudeCode/managed-settings.json          1     1\n  SOFTWARE/Policies/ClaudeCode                            1     1\n  /etc/nddev-invented/managed-settings.json               0     0   (control)\n  NddevInvented/ClaudeCode/managed-settings.json          0     0   (control)\n```\n\nThe controls return zero, so the search discriminates. The three per-OS paths are joined at runtime -- the bytes carry `f(r,\"managed-settings.json\")` and `zt(iR,\"managed-settings.json\")` rather than any assembled form -- which is why every runtime-joined path in this record reads `page` and why a literal search cannot confirm one. **What the bytes do carry is one sentence naming the Windows pair**, and it is the only place in either artifact where a managed-settings path appears assembled:\n\n> *\"the HKLM SOFTWARE/Policies/ClaudeCode registry key or C:/Program Files/ClaudeCode/managed-settings.json — WSL reads managed settings from the full Windows policy chain (HKLM, C:/Program Files/ClaudeCode via DrvFs, HKCU)\"*\n\nSo the old Windows value was wrong and its replacement is measured rather than read off a page. `ProgramData` does occur in these bytes, four times, and none is about this product's policy: a sandbox base-named-objects list, a trust-CA helper, and an Azure agent token path. A grep that stopped at the bare word would have confirmed the wrong answer.\n\n**And one thing neither the old record nor the review had.** That sentence documents `wslInheritsWindowsSettings`: with it set in an admin-only Windows source, a WSL process reads the **Windows** policy chain rather than the Linux one. WSL is therefore not simply a Linux host for this product's policy layer, and a record that treats it as one answers the wrong question for a machine where that switch is on. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
         "source": "path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference"
+      },
+      {
+        "path": "$HOME/.agents/skills",
+        "reason": "The shared cross-product skills convention, and **this is the one harness of the seven that does not read it**. Recorded because six of the seven declare `scoped_projection_profiles` for `user_root` and this one declares none, and an unexplained absence on a page reads exactly like an oversight.\n\nMeasured 2026-08-31 in the pinned artifact, digest checked against this baseline's own table before a byte was read: `.agents/skills` appears **zero** times and `.agents/` zero times, while `.claude/skills` appears 66 times, `.claude/agents` 22 and `.claude/plugins` 9 -- so the search discriminates inside this product. The discriminating control is a sibling rather than an invented string: the same search over pi 0.84.4 returns `.agents/skills` 21 times and over opencode 1.18.25 once, and both of those declare the scope. A negative is worth what its control is worth, and here the control is another vendor answering yes to the identical question.\n\nSo there is nothing to own: a scope declared for a directory this product never opens would be the same false statement as a namespace nobody can source. Re-ask when the pin moves.",
+        "source": "measured in claude-code-linux-x64-2.1.251.tgz, with pi 0.84.4 and opencode 1.18.25 as controls"
       }
     ],
     "config_home_env": "CLAUDE_CONFIG_DIR",
@@ -282,7 +310,7 @@
     "verified_at": "2026-08-29T08:17:16+00:00"
   },
   "verified_at": "2026-08-29T08:17:16+00:00",
-  "setup_catalogue_digest": "sha256:9820c375e40ebbcfc39d11adfafac09537ce68db00f36257a78d36cbd70a3536",
+  "setup_catalogue_digest": "sha256:729084780f5a3cea6d7a9eee14ede71428689f7630ef1a7f00ef649aee5d384c",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
