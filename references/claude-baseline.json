@@ -93,9 +93,9 @@
           "instruction"
         ],
         "shape": "file",
-        "source": "https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/memory; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/CLAUDE.md` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
+        "note": "Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/CLAUDE.md` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "settings.json",
@@ -103,9 +103,9 @@
           "setting"
         ],
         "shape": "file",
-        "source": "https://code.claude.com/docs/en/settings; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/settings; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "The `plugin` kind was routed here too, and is withdrawn. `enabledPlugins` and `extraKnownMarketplaces` are keys in this file, so a plugin does reach Claude Code through it -- but this provider has no merge semantics: `write_bundle_files` calls `remove_managed` and then writes a bundle's bytes verbatim. A `plugin` component carrying `settings.json` would replace the whole file and, because the removal runs first, delete `CLAUDE.md`, `skills`, `agents`, `commands` and `rules` on the way in. It was the only kind across all seven routed to a file rather than a directory, which is the shape that should have prompted the question. Declaring it again means building settings-merge first. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/settings.json` as a literal, 89 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
+        "note": "The `plugin` kind was routed here too, and is withdrawn. `enabledPlugins` and `extraKnownMarketplaces` are keys in this file, so a plugin does reach Claude Code through it -- but this provider has no merge semantics: `write_bundle_files` calls `remove_managed` and then writes a bundle's bytes verbatim. A `plugin` component carrying `settings.json` would replace the whole file and, because the removal runs first, delete `CLAUDE.md`, `skills`, `agents`, `commands` and `rules` on the way in. It was the only kind across all seven routed to a file rather than a directory, which is the shape that should have prompted the question. Declaring it again means building settings-merge first. Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/settings.json` as a literal, 89 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "skills",
@@ -114,9 +114,9 @@
           "plugin"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/skills; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them. Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/skills` as a literal, 51 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.\n\n**Two kinds, and the product distinguishes them by manifest.** Its own reference: *\"Any folder under a skills directory that contains a `.claude-plugin/plugin.json` manifest is loaded as a plugin named `<name>@skills-dir` on the next session, with no marketplace and no install step.\"* Its table gives all three shapes: `<skills-dir>/foo/SKILL.md` with no manifest is a skill `foo`; `<skills-dir>/foo/.claude-plugin/plugin.json` is a plugin `foo@skills-dir` that can bundle its own skills, agents and hooks; `<plugin>/skills/bar/SKILL.md` is a skill packaged inside a plugin. The scope table names `~/.claude/skills/` as **personal**, loading *in every project*, with the workspace trust gate applying only to the project-scope directory.\n\n`plugin` was undeclared here until 2026-08-29 on the reasoning that a plugin projects through `settings.json` -- true of *enabling* one, and never the whole question. This mechanism needs no settings key, no marketplace and no install."
+        "note": "Two neighbouring products read this directory, measured from their own pinned bytes. Grok's embedded reference: `skills = true  # scan ~/.claude/skills/ and <cwd>/.claude/skills/`, User tier, Lowest priority, configurable. OpenCode carries `.claude/skills/<name>/SKILL.md` as a path literal and the vendor lists it as *Global Claude-compatible*. This provider's ownership is unchanged -- it is Claude Code's own home and this is the harness this provider configures -- but a namespace is removed whole, so a remove here also changes what Grok and OpenCode see. `remove` says the namespaces go whole; it cannot say who else was reading them. Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/skills` as a literal, 51 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.\n\n**Two kinds, and the product distinguishes them by manifest.** Its own reference: *\"Any folder under a skills directory that contains a `.claude-plugin/plugin.json` manifest is loaded as a plugin named `<name>@skills-dir` on the next session, with no marketplace and no install step.\"* Its table gives all three shapes: `<skills-dir>/foo/SKILL.md` with no manifest is a skill `foo`; `<skills-dir>/foo/.claude-plugin/plugin.json` is a plugin `foo@skills-dir` that can bundle its own skills, agents and hooks; `<plugin>/skills/bar/SKILL.md` is a skill packaged inside a plugin. The scope table names `~/.claude/skills/` as **personal**, loading *in every project*, with the workspace trust gate applying only to the project-scope directory.\n\n`plugin` was undeclared here until 2026-08-29 on the reasoning that a plugin projects through `settings.json` -- true of *enabling* one, and never the whole question. This mechanism needs no settings key, no marketplace and no install."
       },
       {
         "path": "agents",
@@ -124,9 +124,9 @@
           "agent"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/sub-agents; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/sub-agents; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/agents` as a literal, 20 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
+        "note": "Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/agents` as a literal, 20 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody."
       },
       {
         "path": "commands",
@@ -134,17 +134,17 @@
           "command"
         ],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/skills; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/skills; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/commands` as a literal, 8 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. **Re-cited 2026-08-30. The page this row named, `/docs/en/slash-commands`, now serves the skills page byte-for-byte** -- checked as HTML and not only as the `.md` twin, because a fetch artifact would look the same. The vendor merged the two: *\"Custom commands have been merged into skills. A file at `.claude/commands/deploy.md` and a skill at `.claude/skills/deploy/SKILL.md` both create `/deploy` and work the same way. Your existing `.claude/commands/` files keep working.\"* The surface is unchanged and the directory is still read; what moved is where it is documented. A liveness check could not see this -- the old URL answers 200 -- which is a citation pointing at a different subject rather than at nothing."
+        "note": "Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/commands` as a literal, 8 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. **Re-cited 2026-08-30. The page this row named, `/docs/en/slash-commands`, now serves the skills page byte-for-byte** -- checked as HTML and not only as the `.md` twin, because a fetch artifact would look the same. The vendor merged the two: *\"Custom commands have been merged into skills. A file at `.claude/commands/deploy.md` and a skill at `.claude/skills/deploy/SKILL.md` both create `/deploy` and work the same way. Your existing `.claude/commands/` files keep working.\"* The surface is unchanged and the directory is still read; what moved is where it is documented. A liveness check could not see this -- the old URL answers 200 -- which is a citation pointing at a different subject rather than at nothing."
       },
       {
         "path": "rules",
         "kinds": [],
         "shape": "directory",
-        "source": "https://code.claude.com/docs/en/memory; path literal read from the pinned 2.1.251 artifact",
+        "source": "https://code.claude.com/docs/en/memory; path literal read from the 2.1.251 artifact",
         "evidence": "bytes",
-        "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/rules` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.\n\n**Written down 2026-08-30 rather than left implying it is coming, and the consumer's measurement makes the reason stronger than this row put it.** This said one kind on two surfaces leaves a compiler choosing with nothing telling it how. The consumer measured its own lookup: `rule_for(component_type, harness_id)` scans its rule table and returns the **first** match. So a second row for one kind is not ambiguous-and-unresolved -- it is *unreachable, silently*. Nothing would refuse it and nothing would say it was skipped.\n\nThe inverse already works and is in that table: claude's `plugin` and `skill` both project to `skills` -- two kinds sharing one path, two lookups, no collision. One kind on two paths is the direction the lookup cannot express.\n\n**And this is not waiting on a release.** Per-surface selection is not on the consumer's roadmap, and if it arrives it changes the component model rather than the table: a component would have to name its surface, which is a passport field and an architecture decision. So there is no consumer version to re-ask this against. Re-ask when a passport carries a surface name; the consumer will say when one does."
+        "note": "\"Personal rules in ~/.claude/rules/ apply to every project on your machine.\" Markdown files, optionally with a `paths` frontmatter list that scopes a rule to matching files. Owned so a setup can carry one; no component kind routes here, because `instruction` already routes to CLAUDE.md and one kind with two surfaces would leave a compiler to choose with nothing telling it how Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/rules` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.\n\n**Written down 2026-08-30 rather than left implying it is coming, and the consumer's measurement makes the reason stronger than this row put it.** This said one kind on two surfaces leaves a compiler choosing with nothing telling it how. The consumer measured its own lookup: `rule_for(component_type, harness_id)` scans its rule table and returns the **first** match. So a second row for one kind is not ambiguous-and-unresolved -- it is *unreachable, silently*. Nothing would refuse it and nothing would say it was skipped.\n\nThe inverse already works and is in that table: claude's `plugin` and `skill` both project to `skills` -- two kinds sharing one path, two lookups, no collision. One kind on two paths is the direction the lookup cannot express.\n\n**And this is not waiting on a release.** Per-surface selection is not on the consumer's roadmap, and if it arrives it changes the component model rather than the table: a component would have to name its surface, which is a passport field and an architecture decision. So there is no consumer version to re-ask this against. Re-ask when a passport carries a surface name; the consumer will say when one does."
       },
       {
         "path": "workflows",
@@ -270,6 +270,52 @@
     "shape": "gzip-tar",
     "platforms": {
       "linux/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.258.tgz",
+        "bytes": 97075635,
+        "sha256": "sha256:2f0ad50cd3efd5707323f48b43af22c5cbc045e74cdfc16d25c5a73581f3b196",
+        "member": "package/claude"
+      },
+      "linux/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.258.tgz",
+        "bytes": 96664469,
+        "sha256": "sha256:037f8a21ae74a29b613f02cd3986cefb0b00fcb14f957a8dab98dc2e3f3fd753",
+        "member": "package/claude"
+      },
+      "macos/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.258.tgz",
+        "bytes": 86968654,
+        "sha256": "sha256:eba374d2796edf6ed9652b40d4c081a1b7d2c206b5f2aec6187fcb3384087686",
+        "member": "package/claude"
+      },
+      "macos/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.258.tgz",
+        "bytes": 90955658,
+        "sha256": "sha256:a03bdcd9c7de29fe9f01bed0b8cff3f5a61ada9200536296e2b17f565d0294c2",
+        "member": "package/claude"
+      },
+      "windows/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.258.tgz",
+        "bytes": 96401609,
+        "sha256": "sha256:67703e7d3f443f5000da112f83a616208999cc74a1d8fb3d12cd462e0f257e81",
+        "member": "package/claude.exe"
+      },
+      "windows/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.258.tgz",
+        "bytes": 99482091,
+        "sha256": "sha256:347e6c1ea33a18bbdb8add7bdb5f92ef67e0c7d7d816cfa71e5a2883ef17f25d",
+        "member": "package/claude.exe"
+      }
+    },
+    "version": "2.1.258",
+    "verified_at": "2026-09-02T00:31:05+00:00"
+  },
+  "verified_at": "2026-09-02T00:31:05+00:00",
+  "setup_catalogue_digest": "sha256:dfb125471ead735bdca442f463f8bbfd372a562c3fb2647d5d1c548fb4235a9c",
+  "previous_software_artifacts": {
+    "command": "claude",
+    "shape": "gzip-tar",
+    "platforms": {
+      "linux/arm64": {
         "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.251.tgz",
         "bytes": 95743772,
         "sha256": "sha256:50760f283bf289a8bfb6f25ab86276808fd038b8f724ba5eaffb9b195483846d",
@@ -309,52 +355,6 @@
     "version": "2.1.251",
     "verified_at": "2026-08-29T08:17:16+00:00"
   },
-  "verified_at": "2026-08-29T08:17:16+00:00",
-  "setup_catalogue_digest": "sha256:729084780f5a3cea6d7a9eee14ede71428689f7630ef1a7f00ef649aee5d384c",
-  "previous_software_artifacts": {
-    "command": "claude",
-    "shape": "gzip-tar",
-    "platforms": {
-      "linux/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.250.tgz",
-        "bytes": 95938811,
-        "sha256": "sha256:7ee8b8d4d3eda2da01b8a376ce42e229480b1faca76708d553d938df36b160c5",
-        "member": "package/claude"
-      },
-      "linux/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.250.tgz",
-        "bytes": 95519792,
-        "sha256": "sha256:a17a63df5de33b974745b4237ba8e9693525ecfd0f19c54c8187b8209be9db8e",
-        "member": "package/claude"
-      },
-      "macos/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.250.tgz",
-        "bytes": 85581770,
-        "sha256": "sha256:f95962e0b881dd1f215fa6a63cd653f3f21a85015695eeccdfbdb8e49afc29cf",
-        "member": "package/claude"
-      },
-      "macos/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.250.tgz",
-        "bytes": 89561735,
-        "sha256": "sha256:7442aa06b759e126b0dda11270a196e84feda971d4a485b6d71cc5890b587d83",
-        "member": "package/claude"
-      },
-      "windows/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.250.tgz",
-        "bytes": 95361743,
-        "sha256": "sha256:85b9cebe62ade82e28402741114cdde716bbe219ac9e3f20af1b123e94916cff",
-        "member": "package/claude.exe"
-      },
-      "windows/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.250.tgz",
-        "bytes": 98400997,
-        "sha256": "sha256:9a750be6099e0ac8039757eb102a9619b8f70baed3ba5a6933a82ea433e2d65f",
-        "member": "package/claude.exe"
-      }
-    },
-    "version": "2.1.250",
-    "verified_at": "2026-08-28T04:38:52+00:00"
-  },
   "permission_boundary": {
     "measured_at": "2026-08-30",
     "measured_against": "2.1.251",
@@ -385,5 +385,5 @@
     "DISABLE_UPDATES",
     "DISABLE_UPGRADE_COMMAND"
   ],
-  "source_verified_runtime_flags_note": "Read out of the pinned 2.1.251 artifact on 2026-08-31, after its digest was checked against the artifact table: `DISABLE_UPDATES` nine times, `DISABLE_AUTOUPDATER` eleven, `DISABLE_UPGRADE_COMMAND` four, and an invented name zero, so the search discriminates.\n\n**This block did not exist until now, and launch has set `DISABLE_UPDATES` since 0.0.42.** The measurement was written in the declaration's own comment, which is a claim about method with the method a git archaeology away -- the same defect as a total without its root. `the_switch_it_sets_was_measured` reads this list for every harness that forces a switch, and it caught this one the first time it ran.\n\n`DISABLE_UPDATES` is the one set, because the vendor documents it as stopping manual updates too: an autoupdater switched off still leaves `claude update` able to replace the bytes this provider pinned."
+  "source_verified_runtime_flags_note": "Read out of the 2.1.251 artifact on 2026-08-31, after its digest was checked against the artifact table: `DISABLE_UPDATES` nine times, `DISABLE_AUTOUPDATER` eleven, `DISABLE_UPGRADE_COMMAND` four, and an invented name zero, so the search discriminates.\n\n**This block did not exist until now, and launch has set `DISABLE_UPDATES` since 0.0.42.** The measurement was written in the declaration's own comment, which is a claim about method with the method a git archaeology away -- the same defect as a total without its root. `the_switch_it_sets_was_measured` reads this list for every harness that forces a switch, and it caught this one the first time it ran.\n\n`DISABLE_UPDATES` is the one set, because the vendor documents it as stopping manual updates too: an autoupdater switched off still leaves `claude update` able to replace the bytes this provider pinned."
 }

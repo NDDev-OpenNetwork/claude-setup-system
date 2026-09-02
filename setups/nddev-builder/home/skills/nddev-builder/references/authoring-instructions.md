@@ -11,7 +11,7 @@ Decided by: https://code.claude.com/docs/en/memory
 
 ## What the record says about it
 
-Confirmed 2026-08-29 from the pinned 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/CLAUDE.md` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.
+Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline's own sha256: the product carries `.claude/CLAUDE.md` as a literal, 9 time(s), joined to the home its `CLAUDE_CONFIG_DIR` resolves. The vendor page beside it says the same thing; what the artifact adds is that a wrong path here would now be visible to something rather than to nobody.
 
 ## Where the other harnesses keep theirs
 
