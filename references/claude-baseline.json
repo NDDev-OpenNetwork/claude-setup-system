@@ -385,5 +385,17 @@
     "DISABLE_UPDATES",
     "DISABLE_UPGRADE_COMMAND"
   ],
-  "source_verified_runtime_flags_note": "Read out of the 2.1.251 artifact on 2026-08-31, after its digest was checked against the artifact table: `DISABLE_UPDATES` nine times, `DISABLE_AUTOUPDATER` eleven, `DISABLE_UPGRADE_COMMAND` four, and an invented name zero, so the search discriminates.\n\n**This block did not exist until now, and launch has set `DISABLE_UPDATES` since 0.0.42.** The measurement was written in the declaration's own comment, which is a claim about method with the method a git archaeology away -- the same defect as a total without its root. `the_switch_it_sets_was_measured` reads this list for every harness that forces a switch, and it caught this one the first time it ran.\n\n`DISABLE_UPDATES` is the one set, because the vendor documents it as stopping manual updates too: an autoupdater switched off still leaves `claude update` able to replace the bytes this provider pinned."
+  "source_verified_runtime_flags_note": "Read out of the 2.1.251 artifact on 2026-08-31, after its digest was checked against the artifact table: `DISABLE_UPDATES` nine times, `DISABLE_AUTOUPDATER` eleven, `DISABLE_UPGRADE_COMMAND` four, and an invented name zero, so the search discriminates.\n\n**This block did not exist until now, and launch has set `DISABLE_UPDATES` since 0.0.42.** The measurement was written in the declaration's own comment, which is a claim about method with the method a git archaeology away -- the same defect as a total without its root. `the_switch_it_sets_was_measured` reads this list for every harness that forces a switch, and it caught this one the first time it ran.\n\n`DISABLE_UPDATES` is the one set, because the vendor documents it as stopping manual updates too: an autoupdater switched off still leaves `claude update` able to replace the bytes this provider pinned.",
+  "surface_presence": {
+    "measured_at": "2026-09-02",
+    "artifact": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.258.tgz",
+    "artifact_sha256": "sha256:037f8a21ae74a29b613f02cd3986cefb0b00fcb14f957a8dab98dc2e3f3fd753",
+    "product_version": "2.1.258",
+    "declared_surfaces": 7,
+    "present": 7,
+    "absent": [],
+    "control": "zzq-invented-surface-nobody-ships",
+    "control_hits": 0,
+    "method": "Every namespace this harness declares, global and scoped, searched as a fixed string in the artifact the current pin names, digest verified before reading; both the declared path and its last segment counted, because a product that composes a path by joining segments never spells the whole of it. A count here is a lower bound and not a routing proof -- what it answers is whether a surface vanished from the product under a version bump, which five of the seven took on 2026-09-02. The invented control was searched in the same run and found nowhere, so the search discriminates."
+  }
 }
