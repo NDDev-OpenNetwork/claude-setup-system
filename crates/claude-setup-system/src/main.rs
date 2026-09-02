@@ -43,7 +43,7 @@ pub const CLAUDE: Harness = Harness {
     launch_binding: LaunchBinding::Complete {
         how: "measured by making the product write its own configuration into the target",
     },
-    // Measured 2026-08-30 in the pinned 2.1.251 artifact: `DISABLE_UPDATES` nine
+    // Measured 2026-08-30 in the 2.1.251 artifact: `DISABLE_UPDATES` nine
     // times, beside `DISABLE_AUTOUPDATER` and `DISABLE_UPGRADE_COMMAND`. The
     // vendor documents the first as the one that stops manual updates too, which
     // is the one that matters: an autoupdater switched off still leaves `claude
