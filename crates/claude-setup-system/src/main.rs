@@ -22,8 +22,8 @@ use std::process::ExitCode;
 
 mod software;
 
-use harness_runtime::{Harness, LaunchBinding};
-use provider_v3::{ComponentKind, ProjectionKind};
+use harness_runtime::{Harness, LaunchBinding, Scoped};
+use provider_v3::{ComponentKind, ProjectionKind, TargetScope};
 
 /// Everything specific to Claude Code, verified against `claude-baseline.json`.
 pub const CLAUDE: Harness = Harness {
@@ -155,12 +155,17 @@ pub const CLAUDE: Harness = Harness {
         ProjectionKind::Marketplace,
         ProjectionKind::Plugin,
     ],
-    // One scope. Claude Code keeps a project copy of every surface, but under `.claude/`
-    // in the workspace rather than under this target -- a different root, not a
-    // second scope of this one.
-    //
-    // Empty rather than absent: a harness that owns one target says so.
-    scoped_projections: &[],
+    // Project-root CLAUDE.md is a distinct, version-controlled surface. The
+    // vendor documents both `./CLAUDE.md` and `./.claude/CLAUDE.md`; the pilot
+    // owns the first exact route only, because one instruction kind cannot be
+    // projected to both without an explicit adaptation choosing between them.
+    scoped_projections: &[Scoped {
+        target_scope: TargetScope::Project,
+        profile_id: "claude/native-files/project/1",
+        component_kinds: &[ComponentKind::Instruction],
+        projection_kinds: &[ProjectionKind::NativeFiles],
+        native_namespaces: &["CLAUDE.md"],
+    }],
     max_files: 8192,
     max_bytes: 64 * 1024 * 1024,
     kit_identity: include_str!("../../../provider-kit/v3/KIT-IDENTITY.json"),
@@ -500,10 +505,10 @@ mod tests {
             &harness_runtime::Catalog::at(&root).list().unwrap(),
         );
         assert!(found.problems.is_empty(), "{}", found.problems.join("\n  "));
-        // claude carries 9 file(s) inside its skill. Stated so that a layout change emptying the skill fails here rather than passing a guard with nothing left to walk.
+        // claude carries 10 file(s) inside its skill. Stated so that a layout change emptying the skill fails here rather than passing a guard with nothing left to walk.
         assert_eq!(
-            found.entry_points, 9,
-            "the stranded-file guard walked {} files inside skills, not 9",
+            found.entry_points, 10,
+            "the stranded-file guard walked {} files inside skills, not 10",
             found.entry_points
         );
     }

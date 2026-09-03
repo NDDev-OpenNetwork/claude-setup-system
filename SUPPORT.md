@@ -177,6 +177,22 @@ Configuration home as the product documents it: `~/.claude`.
 A path routing no component kind is owned so a setup can carry it;
 nothing compiles a component to it.
 
+### A second target: `target_scope: project`
+
+Rooted at `project root`, which is not the configuration home
+above. A consumer reaches it by naming the scope on the request, and
+every path below is relative to that root.
+
+| Path | Component kinds routed here | Decided by |
+| --- | --- | --- |
+| `CLAUDE.md` | `instruction` | [source](https://code.claude.com/docs/en/memory) -- re-read 2026-09-03 for Claude Code 2.1.259 |
+
+This root is read by several products at once, so under this scope
+`remove`, the backup and a restore act on the files this program
+recorded writing rather than on the directory whole. A neighbour's
+files are never captured into a backup slot here, and never reverted
+by a restore.
+
 ### Considered and not owned
 
 Everything named here is left exactly as it was found, like any

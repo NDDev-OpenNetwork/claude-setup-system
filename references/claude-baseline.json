@@ -252,6 +252,34 @@
     ],
     "config_home_env": "CLAUDE_CONFIG_DIR",
     "config_home_env_note": "Measured 2026-08-28: `mcp add --scope user` under this variable wrote `<target>/.claude.json`, so the product's home follows it.",
+    "scoped": [
+      {
+        "target_scope": "project",
+        "root": "project root",
+        "surfaces": [
+          {
+            "path": "CLAUDE.md",
+            "kinds": ["instruction"],
+            "shape": "file",
+            "source": "https://code.claude.com/docs/en/memory; re-read 2026-09-03 for Claude Code 2.1.259",
+            "evidence": "page",
+            "note": "Anthropic's current scope table names both ./CLAUDE.md and ./.claude/CLAUDE.md as team-shared project instructions. This first profile owns only the repository-root spelling: the immutable adaptation selects it, while claiming both would give one instruction kind two destinations without a selector."
+          }
+        ],
+        "declined": [
+          {
+            "path": ".claude/CLAUDE.md",
+            "reason": "The product reads it, but the first explicit project adaptation selects repository-root CLAUDE.md. Owning both would make one component kind ambiguous until its immutable adaptation names the alternate member.",
+            "source": "https://code.claude.com/docs/en/memory"
+          },
+          {
+            "path": "CLAUDE.local.md",
+            "reason": "The vendor defines this as private local project preference and recommends gitignore. A public setup must not replace a person's local override.",
+            "source": "https://code.claude.com/docs/en/memory"
+          }
+        ]
+      }
+    ],
     "configuration_format": {
       "file": "settings.json",
       "grammar": "json",
@@ -266,6 +294,52 @@
     }
   },
   "software_artifacts": {
+    "command": "claude",
+    "shape": "gzip-tar",
+    "platforms": {
+      "linux/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.259.tgz",
+        "bytes": 97662709,
+        "sha256": "sha256:d14a6b349115c12765766d14b6d727a62bfcfb8da3ecd514348ce8788228e1ba",
+        "member": "package/claude"
+      },
+      "linux/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.259.tgz",
+        "bytes": 97244038,
+        "sha256": "sha256:3fdf03de822d74d43d14eb54d9a2b4dfaa1854a03c38baea1ba871e2b6ebf9d6",
+        "member": "package/claude"
+      },
+      "macos/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.259.tgz",
+        "bytes": 87558821,
+        "sha256": "sha256:979e70733dd39dad59d837e803a784399299d4b9fbb6c8994c83eefbcb2bf4b8",
+        "member": "package/claude"
+      },
+      "macos/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.259.tgz",
+        "bytes": 91556534,
+        "sha256": "sha256:3c4192427a7e151599fc1ec3d47dfb0f7610b82f344b2ce0f0bb5cbe5026ac39",
+        "member": "package/claude"
+      },
+      "windows/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.259.tgz",
+        "bytes": 96983056,
+        "sha256": "sha256:cd9229add3a496d1e3760fc9ac509b7f169996b957c14feb3b8fc42f86e15622",
+        "member": "package/claude.exe"
+      },
+      "windows/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.259.tgz",
+        "bytes": 100064367,
+        "sha256": "sha256:9857c97cb9bd519286bc59c77813eb3010e36cdffe21a9dd7b4fb184b4f5c8a1",
+        "member": "package/claude.exe"
+      }
+    },
+    "version": "2.1.259",
+    "verified_at": "2026-09-03T13:59:07+00:00"
+  },
+  "verified_at": "2026-09-03T13:59:07+00:00",
+  "setup_catalogue_digest": "sha256:ca56d29d2aa00d25280a3aa5cf8193aa40b1a1d440a13eb13a9de126d3b758a5",
+  "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
     "platforms": {
@@ -308,52 +382,6 @@
     },
     "version": "2.1.258",
     "verified_at": "2026-09-02T00:31:05+00:00"
-  },
-  "verified_at": "2026-09-02T00:31:05+00:00",
-  "setup_catalogue_digest": "sha256:32f9d37361aa012eae180f0c56114909be9745add7e85c280b9611fbbaa25f7b",
-  "previous_software_artifacts": {
-    "command": "claude",
-    "shape": "gzip-tar",
-    "platforms": {
-      "linux/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.251.tgz",
-        "bytes": 95743772,
-        "sha256": "sha256:50760f283bf289a8bfb6f25ab86276808fd038b8f724ba5eaffb9b195483846d",
-        "member": "package/claude"
-      },
-      "linux/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.251.tgz",
-        "bytes": 95323995,
-        "sha256": "sha256:7e2d6d13baccd64cd2d9a8781643ae23a48db009ad746d1df0cfec38d5ed0a44",
-        "member": "package/claude"
-      },
-      "macos/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.251.tgz",
-        "bytes": 85356126,
-        "sha256": "sha256:cb3ecffa649ea20b78f3b7fe4a7395d7a225a510ae18521f6b65c669ecf4d9fd",
-        "member": "package/claude"
-      },
-      "macos/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.251.tgz",
-        "bytes": 89288269,
-        "sha256": "sha256:fed11267c112c48a250e05c865c2b238a5933408910ca8f5ee3ffad864f2aefb",
-        "member": "package/claude"
-      },
-      "windows/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.251.tgz",
-        "bytes": 95159400,
-        "sha256": "sha256:d6e430c9636f387849f59b88d002326c19d2550a3ae4cb4243d67850bacd755f",
-        "member": "package/claude.exe"
-      },
-      "windows/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.251.tgz",
-        "bytes": 98194588,
-        "sha256": "sha256:e58a24f9c90ffee8241d618405c9aedc2f51c2dc6c30fa3d2c204823b066015a",
-        "member": "package/claude.exe"
-      }
-    },
-    "version": "2.1.251",
-    "verified_at": "2026-08-29T08:17:16+00:00"
   },
   "permission_boundary": {
     "measured_at": "2026-08-30",
