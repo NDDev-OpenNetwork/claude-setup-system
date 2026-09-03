@@ -40,6 +40,23 @@ the kind it would carry already routes somewhere else. One kind on two
 surfaces makes a consumer's route ambiguous, and the guard in
 `harness_runtime::surfaces` refuses it by name.
 
+## A second target: `target_scope: project`
+
+Rooted at `project root`, which is **not** this product's configuration
+home. A consumer reaches it by naming the scope on the request, and
+every path below is relative to that root rather than to the home
+above -- writing the root into the path again would nest it twice.
+
+| path | routes | shape | decided by | exercised by |
+| --- | --- | --- | --- | --- |
+| `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> | *nothing — a page* |
+
+**Under a scope the namespace is the permission and the recorded
+files are the inventory.** A root like this one is read by several
+products at once, so `remove`, the capture and a restore all act on
+the files this provider recorded writing -- never on the namespace
+whole, which would take or revert a neighbour's work.
+
 ## Considered and not owned
 
 14 rows. Each records what was searched, so the next reader does not repeat the search:
