@@ -338,7 +338,7 @@
     "verified_at": "2026-09-03T13:59:07+00:00"
   },
   "verified_at": "2026-09-03T13:59:07+00:00",
-  "setup_catalogue_digest": "sha256:ca56d29d2aa00d25280a3aa5cf8193aa40b1a1d440a13eb13a9de126d3b758a5",
+  "setup_catalogue_digest": "sha256:ca0eecb7f7272aa035e22c8608919c0af2649f5f1997cc50dce74dd578c0b3bc",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",

@@ -16,6 +16,12 @@ twice, which is a mistake this estate has made and shipped.
 Anthropic's current scope table names both ./CLAUDE.md and ./.claude/CLAUDE.md as team-shared project instructions. This first profile owns only the repository-root spelling: the immutable adaptation selects it, while claiming both would give one instruction kind two destinations without a selector.
 
 
+Considered under this scope and not owned:
+
+- **`.claude/CLAUDE.md`** — The product reads it, but the first explicit project adaptation selects repository-root CLAUDE.md. Owning both would make one component kind ambiguous until its immutable adaptation names the alternate member.
+- **`CLAUDE.local.md`** — The vendor defines this as private local project preference and recommends gitignore. A public setup must not replace a person's local override.
+
+
 **A setup cannot carry one of these.** A setup is installed into one
 target and its payload is relative to that target, so a component
 for this scope is installed by the consumer against that root -- not

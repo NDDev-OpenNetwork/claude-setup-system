@@ -50,6 +50,11 @@ above -- writing the root into the path again would nest it twice.
 | path | routes | shape | decided by | exercised by |
 | --- | --- | --- | --- | --- |
 | `CLAUDE.md` | instruction | file | <https://code.claude.com/docs/en/memory> | *nothing — a page* |
+Considered under this scope and not owned:
+
+- **`.claude/CLAUDE.md`** — The product reads it, but the first explicit project adaptation selects repository-root CLAUDE.md. Owning both would make one component kind ambiguous until its immutable adaptation names the alternate member.
+- **`CLAUDE.local.md`** — The vendor defines this as private local project preference and recommends gitignore. A public setup must not replace a person's local override.
+
 
 **Under a scope the namespace is the permission and the recorded
 files are the inventory.** A root like this one is read by several
