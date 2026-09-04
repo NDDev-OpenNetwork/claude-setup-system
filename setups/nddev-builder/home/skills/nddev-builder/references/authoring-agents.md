@@ -33,6 +33,7 @@ Generated from the vendor's own reference and the pinned binary. Do not edit: th
 
 - **The keys are camelCase here and kebab-case in a skill.** `disallowedTools` in an agent, `disallowed-tools` in a skill, in the same product. Copying a line between the two silently drops it.
 - Descriptions are budgeted: the vendor asks that they total under 15,000 tokens across all custom subagents, because every one of them is in context at all times.
+- **A plugin-shipped agent is a narrower file.** The vendor drops `hooks`, `mcpServers` and `permissionMode` on agents inside a plugin, for security. Those three still work on a user or project file under `agents/`. The only valid `isolation` value is `worktree`.
 
 ## The same file on the other harnesses
 

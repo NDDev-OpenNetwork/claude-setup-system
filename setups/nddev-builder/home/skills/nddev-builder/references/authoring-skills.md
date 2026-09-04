@@ -36,6 +36,7 @@ Generated from the vendor's own reference and the pinned binary. Do not edit: th
 ## What bites
 
 - **Commands and skills are the same mechanism here.** A file at `commands/<name>.md` and a skill at `skills/<name>/SKILL.md` both create `/<name>`, and they behave the same way. The skill form adds a directory for supporting files and frontmatter that controls who may invoke it.
+- Boolean frontmatter fields accept `yes`/`no`/`on`/`off`/`1`/`0` in any letter case, in addition to `true`/`false`, since v2.1.218.
 
 ## The same file on the other harnesses
 

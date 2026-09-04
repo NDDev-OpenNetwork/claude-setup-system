@@ -22,6 +22,14 @@ Generated from the vendor's own reference and the pinned binary. Do not edit: th
 | `agents` | no | Agent markdown files; replaces the default `agents/`. |
 | `hooks` | no | Hook config paths, or the configuration inline. |
 | `mcpServers` | no | MCP server config paths, or the configuration inline. |
+| `outputStyles` | no | Custom output-style files or directories; replaces the default `output-styles/`. |
+| `lspServers` | no | Language-server configs for code intelligence, as a path, array, or inline object. |
+| `userConfig` | no | Values Claude Code prompts for at enable time. Substituted as `${user_config.KEY}` in MCP/LSP/hook configs, not in a monitor or shell-form hook command. |
+| `homepage` | no | Documentation URL. Metadata only. |
+| `repository` | no | Source-code URL. Metadata only. |
+| `license` | no | License identifier, e.g. MIT. Metadata only. |
+| `keywords` | no | Discovery tags. Metadata only. |
+| `metadata` | no | Free-form object Claude Code does not read. Before v2.1.222 this key was treated as unrecognised. |
 | `defaultEnabled` | no | Whether it starts enabled before the user chooses. Defaults to true. |
 | `dependencies` | no | Other plugins this one needs, optionally with a semver constraint. |
 
@@ -29,6 +37,7 @@ Generated from the vendor's own reference and the pinned binary. Do not edit: th
 
 - Only `plugin.json` goes inside `.claude-plugin/`. Every other directory -- `skills/`, `commands/`, `agents/`, `hooks/`, `bin/`, `scripts/` -- sits at the plugin root, and the plugin root is never the configuration home itself.
 - Claude Code 2.1.259 adds machine-readable validation: run `claude plugin validate <plugin-root> --json` before the repository gate. It validates the native plugin shape; the setup-system gate still proves ownership, rollback and cross-harness constraints.
+- **`themes` and `monitors` are experimental.** Declare them under `experimental.themes` and `experimental.monitors`; a top-level key still loads but `claude plugin validate` warns, and a later release will require the nested form. Unrecognised top-level fields are warnings, not load errors.
 
 ## The same file on the other harnesses
 
@@ -46,13 +55,16 @@ Generated from the same rows as the section above, for every harness in this est
 | `agents` | yes | yes | yes | — |
 | `hooks` | yes | yes | yes | — |
 | `mcpServers` | yes | yes | yes | — |
+| `outputStyles` | yes | — | — | — |
+| `lspServers` | yes | yes | — | — |
+| `userConfig` | yes | — | — | — |
+| `homepage` | yes | — | yes | — |
+| `repository` | yes | — | yes | — |
+| `license` | yes | — | yes | — |
+| `keywords` | yes | — | yes | — |
+| `metadata` | yes | — | — | — |
 | `defaultEnabled` | yes | — | — | — |
 | `dependencies` | yes | — | — | — |
-| `lspServers` | — | yes | — | — |
-| `homepage` | — | — | yes | — |
-| `repository` | — | — | yes | — |
-| `license` | — | — | yes | — |
-| `keywords` | — | — | yes | — |
 | `logo` | — | — | yes | — |
 | `rules` | — | — | yes | — |
 | `variables` | — | — | yes | — |
