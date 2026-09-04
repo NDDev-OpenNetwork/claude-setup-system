@@ -23,5 +23,5 @@ Hold to these, in this order:
 Start from the `nddev-builder` skill. Its routing table sends you to
 `references/surfaces.md` for what this harness owns,
 `references/lifecycle.md` for the commands,
-`references/validation.md` for the gate, and one
+`references/validation.md` for the checks, and one
 `references/authoring-*.md` for each kind of component it routes.
