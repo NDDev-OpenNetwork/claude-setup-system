@@ -1,8 +1,8 @@
 # What This Harness Owns
 
-Generated from `references/claude-baseline.json` by
-`tools/build_nddev_builder.py`. Do not edit: the next render overwrites
-it, and the baseline is where a correction belongs.
+Generated from `references/claude-baseline.json`. Do not edit:
+the next render overwrites it, and the baseline is where a correction
+belongs.
 
 Every row below was decided by a source, and the source is named. Where
 this file and the binary disagree, the binary is right -- ask it with
@@ -14,9 +14,9 @@ this file and the binary disagree, the binary is right -- ask it with
 ## The configuration file
 
 `settings.json` is **json**, and the parser does not accept comments.
-The vendor publishes a schema at <https://json.schemastore.org/claude-code-settings.json>, and `tools/validate_setup_schemas.py` checks every shipped file that names it.
+The vendor publishes a schema at <https://json.schemastore.org/claude-code-settings.json>, and every shipped file that names it is checked against that schema.
 
-Strict JSON. Comment support is an open feature request against the vendor (`anthropics/claude-code` #12688, #17968, #29370) and is not implemented, so a `//` in this file is a parse error rather than a stylistic choice. The schema is SchemaStore's rather than the vendor's own, and `tools/validate_setup_schemas.py` fetches and checks against it.
+Strict JSON. Comment support is an open feature request against the vendor (`anthropics/claude-code` #12688, #17968, #29370) and is not implemented, so a `//` in this file is a parse error rather than a stylistic choice. The schema is SchemaStore's rather than the vendor's own, and every shipped file that names it is checked against that schema.
 
 ## Owned surfaces
 

@@ -284,7 +284,7 @@
       "file": "settings.json",
       "grammar": "json",
       "accepts_comments": false,
-      "note": "Strict JSON. Comment support is an open feature request against the vendor (`anthropics/claude-code` #12688, #17968, #29370) and is not implemented, so a `//` in this file is a parse error rather than a stylistic choice. The schema is SchemaStore's rather than the vendor's own, and `tools/validate_setup_schemas.py` fetches and checks against it.",
+      "note": "Strict JSON. Comment support is an open feature request against the vendor (`anthropics/claude-code` #12688, #17968, #29370) and is not implemented, so a `//` in this file is a parse error rather than a stylistic choice. The schema is SchemaStore's rather than the vendor's own, and every shipped file that names it is checked against that schema.",
       "measured_at": "2026-08-28",
       "schema": "https://json.schemastore.org/claude-code-settings.json"
     },
@@ -338,7 +338,7 @@
     "verified_at": "2026-09-03T13:59:07+00:00"
   },
   "verified_at": "2026-09-03T13:59:07+00:00",
-  "setup_catalogue_digest": "sha256:ca0eecb7f7272aa035e22c8608919c0af2649f5f1997cc50dce74dd578c0b3bc",
+  "setup_catalogue_digest": "sha256:5f01cbf94a53dd4542ff0215fe086e498a261ffeddba3610d3392a6ef81e4ee9",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",
