@@ -11,5 +11,52 @@
     "https://code.claude.com/docs/en/settings-reference",
     "https://code.claude.com/docs/en/skills",
     "https://code.claude.com/docs/en/sub-agents"
+  ],
+  "setup_stable_id": "setup_01M15EN1ETTRD8DWJM8RD6F3AV",
+  "setup_version": "1.5",
+  "setup_passport_digest": "sha256:38cb51962e76edd2e505751a7557d96975cbaaeb08d07e9d384fe6a666d231f6",
+  "component_refs": [
+    {
+      "stable_id": "component_01M15EMT4NGPY6P42M3H5R9PVT",
+      "version": "1.4",
+      "passport_digest": "sha256:0e919cbea8bc59def78d6e5d32266235097f687e2a118374b57d84599d0a221e",
+      "adaptation_id": "adaptation_938e6209a579b15f92eb8fca879ef33ec42918123898ba504e57829e9cf911b7"
+    },
+    {
+      "stable_id": "component_01M15EMTNHRSRMN7Z1Y67NFXWJ",
+      "version": "1.4",
+      "passport_digest": "sha256:d12dc24eea281d7779bf864b86d1ce726a3a99c6ad42e11695a99e7238153379",
+      "adaptation_id": "adaptation_a88a95453b34becb68771eb9313a1de58021bf3562b192f2fa8ab2ef25585b5d"
+    },
+    {
+      "stable_id": "component_01M15EMV74QBFJ96F7GQJ1TEJN",
+      "version": "1.4",
+      "passport_digest": "sha256:548d1887137405c34c2337723d55f91770c2b9fb17565602a9ca607ded656781",
+      "adaptation_id": "adaptation_849d8843d899382aae4b7fe5d010f88e164bed0b436d0d4f77a2c38ff942a30c"
+    },
+    {
+      "stable_id": "component_01M15EMVRP0PJDQZEGQS2X8YKF",
+      "version": "1.4",
+      "passport_digest": "sha256:33bb83ed3cf04c84761775bc6849739e9e42d221f4fd625f72bc3a387b3c73e5",
+      "adaptation_id": "adaptation_af6930a95df5d981d207752d025902efb281d47e84757181bb2bc242596d6371"
+    },
+    {
+      "stable_id": "component_01M15EMWAGMCQPA68HWVQ37HQK",
+      "version": "1.4",
+      "passport_digest": "sha256:c16454bb572dd860755d96d125d2e33cd3806b17751414ae02f080fd2b691aaa",
+      "adaptation_id": "adaptation_f57127f2c539e9e6d0accbd380e6b9378a89df03290f361fa27d1f0837f655c2"
+    },
+    {
+      "stable_id": "component_01M15EMWVT53JBPD0VZZN765XS",
+      "version": "1.6",
+      "passport_digest": "sha256:c4f9aa9088663380e7ab3a6f3b5e17c7530453e7c565b99db6030ec13d01af5a",
+      "adaptation_id": "adaptation_fef09bd8d3d9bf3fc034b4aec134f7f739e20a85889575487984a73b7ac61d7b"
+    },
+    {
+      "stable_id": "component_01M15EN0XEDMEPA3PZHFAF1E5P",
+      "version": "1.4",
+      "passport_digest": "sha256:70516be05374e1b7fb252279941c35028416069e838fba48a6c722468d19a017",
+      "adaptation_id": "adaptation_3d95768ef3d128b4c57f8e66a45a8cdb7dcf7fe0412125ed5d316ea992d48458"
+    }
   ]
 }

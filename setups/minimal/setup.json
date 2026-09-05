@@ -5,5 +5,16 @@
   "sources": [
     "https://code.claude.com/docs/en/settings",
     "https://code.claude.com/docs/en/permissions"
+  ],
+  "setup_stable_id": "setup_01M18ZQR69YK677Q6NCJCVF8X6",
+  "setup_version": "1.2",
+  "setup_passport_digest": "sha256:c1c8e4443e7525533694cd0c251847153fee98d3bf01610ed0837fac5dccb9d7",
+  "component_refs": [
+    {
+      "stable_id": "component_01M18ZQR69YK677Q6NCJCVF8X7",
+      "version": "1.2",
+      "passport_digest": "sha256:5df7f08a43d172e74621b37023c92a06796a15bf9775909d285b87d6c206fa74",
+      "adaptation_id": "adaptation_08727aa111f28d2a95e590c8548accd21576663851b32ed05acf4653b2dac2f6"
+    }
   ]
 }
