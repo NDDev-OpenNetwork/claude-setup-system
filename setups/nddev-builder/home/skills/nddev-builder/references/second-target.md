@@ -22,12 +22,13 @@ Considered under this scope and not owned:
 - **`CLAUDE.local.md`** — The vendor defines this as private local project preference and recommends gitignore. A public setup must not replace a person's local override.
 
 
-**A setup cannot carry one of these.** A setup is installed into one
-target and its payload is relative to that target, so a component
-for this scope is installed by the consumer against that root -- not
-by a setup aimed at the configuration home. If you are looking for
-where to put one by hand, it is the path above joined to the root
-above, and nowhere under the home.
+**A complete setup may include these scoped components.** Each
+provider request still reaches one root. The consumer coordinates
+the roots with `ai-stp install transaction plan`, exact digest
+approval, apply and recovery. A shipped configuration-home preset
+cannot reach this root by nesting a path inside its home payload.
+Declare the component's actual scope and bind the matching root
+explicitly in the transaction.
 
 **The root is shared, and that changes what removal means.** Several
 products read it. Under this scope `remove`, the backup and a
