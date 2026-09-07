@@ -22,7 +22,7 @@ use std::process::ExitCode;
 
 mod software;
 
-use harness_runtime::{Harness, LaunchBinding, Scoped};
+use harness_runtime::{Harness, LaunchBinding, PreservationSurface, Scoped};
 use provider_v3::{ComponentKind, ProjectionKind, TargetScope};
 
 /// Everything specific to Claude Code, verified against `claude-baseline.json`.
@@ -93,6 +93,42 @@ pub const CLAUDE: Harness = Harness {
     // them -- every posture agrees there is nothing, which makes the
     // emptiness a statement none of them made.
     custody_namespaces: &["rules", "workflows"],
+    // Installation does not write Claude's plugin registry. Complete return
+    // must nevertheless preserve its installed version bytes and registration.
+    // Source: code.claude.com/docs/en/plugins-reference, measured 2026-09-07.
+    preservation_surfaces: &[
+        PreservationSurface {
+            scope: None,
+            roots: &[
+                "CLAUDE.md",
+                "settings.json",
+                "skills",
+                "agents",
+                "commands",
+                "rules",
+                "workflows",
+                "hooks",
+                "plugins",
+                ".claude.json",
+                "settings.local.json",
+                "keybindings.json",
+                "statusline-command.sh",
+                "statusline.ps1",
+            ],
+            excluded: &[".credentials.json", "projects", "plugins/data"],
+        },
+        PreservationSurface {
+            scope: Some(TargetScope::Project),
+            roots: &["CLAUDE.md", "CLAUDE.local.md", ".claude", ".mcp.json"],
+            excluded: &[
+                ".claude/.credentials.json",
+                ".claude/.claude.json",
+                ".claude/projects",
+                ".claude/plugins/data",
+                ".claude/.claude-setup-system",
+            ],
+        },
+    ],
     never_touch: &[".credentials.json", "projects", "plugins", ".claude.json"],
     // No near neighbour measured for this product. A marker listed here is a
     // refusal waiting to happen, so nothing is listed without evidence.
