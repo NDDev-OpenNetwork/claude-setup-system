@@ -61,11 +61,16 @@ Generated from the same rows as the section above, for every harness in this est
 | `mode` | — | — | yes | — |
 | `temperature` | — | — | yes | — |
 | `top_p` | — | — | yes | — |
+| `steps` | — | — | yes | — |
+| `prompt` | — | — | yes | — |
+| `hidden` | — | — | yes | yes |
 | `permission` | — | — | yes | — |
 | `disable` | — | — | yes | — |
 | `mainAgent` | — | — | — | yes |
 | `subagent` | — | — | — | yes |
 | `commandExecutionPolicy` | — | — | — | yes |
+| `inheritMcp` | — | — | — | yes |
+| `inheritCustomizations` | — | — | — | yes |
 
 **The part that does not, and says nothing when it does not**: a field absent from a column is not rejected there -- it is read past. Nothing warns, no run fails, and the component behaves differently with the same bytes. Where the field was carrying a restriction, the restriction is simply gone. Check the column before relying on one.
 
