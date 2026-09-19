@@ -20,6 +20,7 @@ Considered under this scope and not owned:
 
 - **`.claude/CLAUDE.md`** — The product reads it, but the first explicit project adaptation selects repository-root CLAUDE.md. Owning both would make one component kind ambiguous until its immutable adaptation names the alternate member.
 - **`CLAUDE.local.md`** — The vendor defines this as private local project preference and recommends gitignore. A public setup must not replace a person's local override.
+- **`AGENTS.md`** — **New in 2.1.277, dated 2026-09-18 from the vendor's changelog**: in a project with no CLAUDE.md, Claude Code reads AGENTS.md instead (not yet on Bedrock, Vertex or Foundry). It is the instruction file four other harnesses in this estate own, so a repository written for them now reaches this product too -- a cross-read that did not exist when this surface was last measured, and the reason the repository-root CLAUDE.md this profile owns is also what suppresses it. Not owned: writing it would compete with four other products' writers for the same file, at a scope where a checkout's own file outranks any install.
 
 
 **A complete setup may include these scoped components.** Each
