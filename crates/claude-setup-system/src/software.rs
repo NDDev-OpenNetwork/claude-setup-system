@@ -20,6 +20,60 @@ use harness_runtime::{Artifact, Delivery, Previous, Shape, Software};
 pub(crate) const ARTIFACTS: &[Artifact] = &[
     Artifact {
         platform: "linux/arm64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.282.tgz",
+        bytes: 107_607_069,
+        sha256: "sha256:3274e35357e8ea4f6676aa6770daa6c1281a29d52d7503775fee19c575ed0fd8",
+        shape: Shape::GzipTar,
+        member: "package/claude",
+    },
+    Artifact {
+        platform: "linux/x86_64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.282.tgz",
+        bytes: 107_356_656,
+        sha256: "sha256:1499a6947b466c2048a678b3291adf1e3f9cc3e3abd8b822f9e03ac85a2bb44b",
+        shape: Shape::GzipTar,
+        member: "package/claude",
+    },
+    Artifact {
+        platform: "macos/arm64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.282.tgz",
+        bytes: 97_521_611,
+        sha256: "sha256:738ce2deba0060eef3cdc55b7aaa6c4c45ecaacdd371bc81ac9088d638204efe",
+        shape: Shape::GzipTar,
+        member: "package/claude",
+    },
+    Artifact {
+        platform: "macos/x86_64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.282.tgz",
+        bytes: 101_563_766,
+        sha256: "sha256:4a0fef1d551fa533e848a29df9ea497871903649b5ecc9670067413cc3a20386",
+        shape: Shape::GzipTar,
+        member: "package/claude",
+    },
+    Artifact {
+        platform: "windows/arm64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.282.tgz",
+        bytes: 106_114_350,
+        sha256: "sha256:425e82a178b9124e140ed7eccb565381c18a9ca1caba29d4c2668c2bc15be580",
+        shape: Shape::GzipTar,
+        member: "package/claude.exe",
+    },
+    Artifact {
+        platform: "windows/x86_64",
+        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.282.tgz",
+        bytes: 110_236_851,
+        sha256: "sha256:34d84a836edd9cf96dbd3b20206bcc61227f48cb81f1b3688dac9e2c0dbc7623",
+        shape: Shape::GzipTar,
+        member: "package/claude.exe",
+    },
+];
+
+/// The artifacts 2.1.278 was published as, kept so
+/// `software_update` has a version to move from and `rollback` a tree to
+/// return to. Measured from bytes when it was the current pin.
+pub(crate) const PREVIOUS_ARTIFACTS: &[Artifact] = &[
+    Artifact {
+        platform: "linux/arm64",
         url: "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.278.tgz",
         bytes: 104_532_073,
         sha256: "sha256:ec54bd853c9cb71cb03874d694a1a38638d350828f0d84e0492fe1734a172302",
@@ -68,68 +122,14 @@ pub(crate) const ARTIFACTS: &[Artifact] = &[
     },
 ];
 
-/// The artifacts 2.1.273 was published as, kept so
-/// `software_update` has a version to move from and `rollback` a tree to
-/// return to. Measured from bytes when it was the current pin.
-pub(crate) const PREVIOUS_ARTIFACTS: &[Artifact] = &[
-    Artifact {
-        platform: "linux/arm64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.273.tgz",
-        bytes: 102_117_697,
-        sha256: "sha256:2030a0b196d9fa8a265bb08afae81fbfe39e67d824b3ee0b2d22bf940ed6f537",
-        shape: Shape::GzipTar,
-        member: "package/claude",
-    },
-    Artifact {
-        platform: "linux/x86_64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.273.tgz",
-        bytes: 101_647_074,
-        sha256: "sha256:ab7679e0dc5b38cd07d9d63e3a1db1178bae722474270469795b733ecada103c",
-        shape: Shape::GzipTar,
-        member: "package/claude",
-    },
-    Artifact {
-        platform: "macos/arm64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.273.tgz",
-        bytes: 91_885_277,
-        sha256: "sha256:9472eb2d68b614dfddb6b3683a98d16be79dc34b66268282b0b6ce8ef4a3e04b",
-        shape: Shape::GzipTar,
-        member: "package/claude",
-    },
-    Artifact {
-        platform: "macos/x86_64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.273.tgz",
-        bytes: 95_952_306,
-        sha256: "sha256:a72dd49c8f4094ef71ddd34a9c1b767845db2087d6cf77772634a3e3d1d85a22",
-        shape: Shape::GzipTar,
-        member: "package/claude",
-    },
-    Artifact {
-        platform: "windows/arm64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.273.tgz",
-        bytes: 101_517_506,
-        sha256: "sha256:a102c527abf2b232fc12c078fc63b332bdb4b1d9b914a7f506ff2a5348322583",
-        shape: Shape::GzipTar,
-        member: "package/claude.exe",
-    },
-    Artifact {
-        platform: "windows/x86_64",
-        url: "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.273.tgz",
-        bytes: 104_549_735,
-        sha256: "sha256:5d5e3b799a9a29d5eafc41fa674d079b1caf2aa8449d005a1369a7c1aad5dc98",
-        shape: Shape::GzipTar,
-        member: "package/claude.exe",
-    },
-];
-
 /// Claude Code's program, and where its bytes come from.
 pub(crate) const SOFTWARE: Software = Software {
-    version: "2.1.278",
+    version: "2.1.282",
     command: "claude",
     delivery: Delivery::Artifacts(ARTIFACTS),
     unsupported: &[],
     previous: Some(Previous {
-        version: "2.1.273",
+        version: "2.1.278",
         artifacts: PREVIOUS_ARTIFACTS,
     }),
 };
