@@ -29,10 +29,13 @@ Strict JSON. Comment support is an open feature request against the vendor (`ant
 | `commands` | command | directory | <https://code.claude.com/docs/en/skills> | read its bytes |
 | `rules` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/memory> | read its bytes |
 | `workflows` | *(routes no kind)* | directory | <https://code.claude.com/docs/en/claude-directory> | read its bytes |
+| `output-styles` | *(routes no kind)* | directory | path literal read from the 2.1.283 artifact, 2026-09-27 | read its bytes |
+| `routines` | *(routes no kind)* | directory | path literal read from the 2.1.283 artifact, 2026-09-27 | read its bytes |
+| `themes` | *(routes no kind)* | directory | path literal read from the 2.1.283 artifact (`userConfigDir("themes")` batch-read of `*.json`), 2026-09-27 | read its bytes |
 
 **A citation is not a measurement.** `decided by` says where a row came from; `exercised by` says whether anybody made the product demonstrate it. Where a row records no method the answer is a page and nothing else, because absence of a record of measurement is not evidence of measurement.
 
-Here that is **0 run**, **7 read from the product's own bytes**, and **0 resting on a page alone**. The last number is the one worth acting on: a row in it is not wrong, it is untested, and the two are indistinguishable from here.
+Here that is **0 run**, **10 read from the product's own bytes**, and **0 resting on a page alone**. The last number is the one worth acting on: a row in it is not wrong, it is untested, and the two are indistinguishable from here.
 
 A surface that routes no kind is owned deliberately: a backup captures
 it and a restore returns it, and no component is routed there because
