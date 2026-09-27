@@ -78,6 +78,14 @@ pub const CLAUDE: Harness = Harness {
         // it; routing nothing, because `command` already routes to `commands`
         // and one kind on two surfaces makes a consumer's route ambiguous.
         "workflows",
+        // Added 2026-09-27, measured in the 2.1.283 artifact: the config-home
+        // enumerator names all three beside `commands` and `agents`. Output
+        // styles, routines and user themes are a person's authored content of
+        // the same class as `workflows` -- owned so a backup captures them,
+        // routing nothing for the same reason.
+        "output-styles",
+        "routines",
+        "themes",
     ],
     // The product's own. `plugins/` is the Claude CLI's registry and cache, not
     // ours to rewrite even though a setup can register a marketplace that fills
@@ -92,7 +100,7 @@ pub const CLAUDE: Harness = Harness {
     // carries files there. So a posture selecting itself must not empty
     // them -- every posture agrees there is nothing, which makes the
     // emptiness a statement none of them made.
-    custody_namespaces: &["rules", "workflows"],
+    custody_namespaces: &["rules", "workflows", "output-styles", "routines", "themes"],
     // Installation does not write Claude's plugin registry. Complete return
     // must nevertheless preserve its installed version bytes and registration.
     // Source: code.claude.com/docs/en/plugins-reference, measured 2026-09-07.
@@ -107,6 +115,9 @@ pub const CLAUDE: Harness = Harness {
                 "commands",
                 "rules",
                 "workflows",
+                "output-styles",
+                "routines",
+                "themes",
                 "hooks",
                 "plugins",
                 ".claude.json",

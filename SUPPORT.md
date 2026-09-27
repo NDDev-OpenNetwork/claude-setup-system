@@ -173,6 +173,9 @@ Configuration home as the product documents it: `~/.claude`.
 | `commands` | `command` | [source](https://code.claude.com/docs/en/skills) -- path literal read from the 2.1.251 artifact |
 | `rules` | -- | [source](https://code.claude.com/docs/en/memory) -- path literal read from the 2.1.251 artifact |
 | `workflows` | -- | [source](https://code.claude.com/docs/en/claude-directory) -- measured in the 2.1.250 binary |
+| `output-styles` | -- | path literal read from the 2.1.283 artifact, 2026-09-27 |
+| `routines` | -- | path literal read from the 2.1.283 artifact, 2026-09-27 |
+| `themes` | -- | path literal read from the 2.1.283 artifact (`userConfigDir("themes")` batch-read of `*.json`), 2026-09-27 |
 
 A path routing no component kind is owned so a setup can carry it;
 nothing compiles a component to it.

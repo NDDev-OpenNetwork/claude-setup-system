@@ -38,14 +38,26 @@
     "commands",
     "agents",
     "hooks",
+    "outputStyles",
     "mcpServers",
     "lspServers",
     "monitors",
     "themes",
-    "userConfig",
+    "workflows",
     "channels",
+    "settings",
+    "userConfig",
     "dependencies",
-    "defaultEnabled"
+    "defaultEnabled",
+    "experimental",
+    "metadata",
+    "displayName",
+    "author",
+    "homepage",
+    "repository",
+    "license",
+    "keywords",
+    "$schema"
   ],
   "plugin_source_types": [
     {
@@ -71,6 +83,10 @@
     {
       "type": "archive",
       "description": "Claude Code 2.1.224+ HTTPS zip with optional sha256; unsupported by organization-managed plugin sync"
+    },
+    {
+      "type": "command",
+      "description": "a command that prints the plugin content (bounded length, printable ASCII -- the install consent UI has to display it); measured in the 2.1.283 plugin-source union, 2026-09-27"
     }
   ],
   "plugin_manifest": ".claude-plugin/plugin.json",
@@ -153,6 +169,30 @@
         "source": "https://code.claude.com/docs/en/claude-directory; measured in the 2.1.250 binary",
         "evidence": "bytes",
         "note": "Personal workflow scripts. The vendor: a script saved to `~/.claude/workflows/` is *just for you*, in contrast to a `.claude/workflows/` shared in a repository, and it *runs as a `/<name>` command*. The binary carries `.claude/workflows/` without a `~`, which is why the root took a page to settle -- the audit had called it global on the strength of the literal alone and was corrected before anything was built on it.\n\nOwned from 2026-08-28 so a backup captures it. **Routing no kind**, for the reason grok's `rules` row gives: `command` already routes to the owned `commands`, and one kind on two surfaces makes a consumer's route ambiguous -- the surfaces guard refuses it by name. Both are real, both are user-level, and which a `command` component should reach waits on the per-kind route the consumer is building.\n\n**Written down 2026-08-30 rather than left implying it is coming, and the consumer's measurement makes the reason stronger than this row put it.** This said one kind on two surfaces leaves a compiler choosing with nothing telling it how. The consumer measured its own lookup: `rule_for(component_type, harness_id)` scans its rule table and returns the **first** match. So a second row for one kind is not ambiguous-and-unresolved -- it is *unreachable, silently*. Nothing would refuse it and nothing would say it was skipped.\n\nThe inverse already works and is in that table: claude's `plugin` and `skill` both project to `skills` -- two kinds sharing one path, two lookups, no collision. One kind on two paths is the direction the lookup cannot express.\n\n**And this is not waiting on a release.** Per-surface selection is not on the consumer's roadmap, and if it arrives it changes the component model rather than the table: a component would have to name its surface, which is a passport field and an architecture decision. So there is no consumer version to re-ask this against. Re-ask when a passport carries a surface name; the consumer will say when one does.\n\n**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`.claude/workflows` 4). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
+      },
+      {
+        "path": "output-styles",
+        "kinds": [],
+        "shape": "directory",
+        "source": "path literal read from the 2.1.283 artifact, 2026-09-27",
+        "note": "\"the output-styles folder of the config home\" -- a user-level directory of output styles the CLI lists styles from, and a plugin component beside it (`outputStyles` in plugin.json). Owned so a backup captures it; routing no kind, for the reason the `rules` row gives: no component kind names output styles today.",
+        "evidence": "bytes"
+      },
+      {
+        "path": "routines",
+        "kinds": [],
+        "shape": "directory",
+        "source": "path literal read from the 2.1.283 artifact, 2026-09-27",
+        "note": "Scheduled remote runs -- the binary's config-tree enumerator names `.claude/routines` beside `commands`/`agents`/`output-styles`, `--routine` is a real flag, and `routines/.state/` is runtime state inside it. Owned so a backup captures it; routing no kind, for the reason the `workflows` row gives: no component kind names routines today.",
+        "evidence": "bytes"
+      },
+      {
+        "path": "themes",
+        "kinds": [],
+        "shape": "directory",
+        "source": "path literal read from the 2.1.283 artifact (`userConfigDir(\"themes\")` batch-read of `*.json`), 2026-09-27",
+        "note": "User color themes, read as `themes/*.json` from the config home. Owned so a backup captures it; routing no kind -- TUI cosmetics a person curates, and no component kind routes them.",
+        "evidence": "bytes"
       }
     ],
     "declined": [
@@ -235,14 +275,32 @@
           "mailbox",
           "bash-log.txt",
           "first-run",
-          "feedback/drafts"
+          "feedback/drafts",
+          "session-env",
+          "uploads",
+          "mcp-skill-archives",
+          "usage-data",
+          "mcp-discovery-cache",
+          "scheduled_tasks.json",
+          "scheduled_tasks.lock",
+          "routines/.state",
+          "worktrees",
+          "remote-settings.json",
+          "roster.json",
+          "adopt.json",
+          "state/settings-review.json",
+          "state/unattended-serving-consent.json",
+          "mcp-needs-auth-cache.json",
+          "gh-pr-status-cache.json"
         ],
-        "note": "**Re-asked at 2.1.251 on 2026-08-31, and the first search said GONE because the needle was this repository's own label.** `session-runtime-state` is a name given here to one row covering several product paths; the product carries the paths and not the label, so searching for the label returns zero at every version. Every member is present in the pinned artifact (`history.jsonl` 15, `checkpoints` 17, `daemon.json` 23, `daemon.log` 13, `assistant-daemon-state.json` 2, `mailbox` 122, `bash-log.txt` 2, `first-run` 6, `feedback/drafts` 4). `members` above exists so the next re-ask searches the subject rather than the label."
+        "note": "**Re-asked at 2.1.251 on 2026-08-31, and the first search said GONE because the needle was this repository's own label.** `session-runtime-state` is a name given here to one row covering several product paths; the product carries the paths and not the label, so searching for the label returns zero at every version. Every member is present in the pinned artifact (`history.jsonl` 15, `checkpoints` 17, `daemon.json` 23, `daemon.log` 13, `assistant-daemon-state.json` 2, `mailbox` 122, `bash-log.txt` 2, `first-run` 6, `feedback/drafts` 4). `members` above exists so the next re-ask searches the subject rather than the label.\n\n**Re-measured at 2.1.283 on 2026-09-27 against the config-tree enumerator and sandbox-literal tables in the artifact.** New members folded in: `session-env`, `uploads`, `mcp-skill-archives`, `usage-data`, `mcp-discovery-cache`, `scheduled_tasks.json`/`.lock`, `routines/.state`, `worktrees`, `remote-settings.json`, `roster.json`, `adopt.json`, `state/settings-review.json`, `state/unattended-serving-consent.json`, `mcp-needs-auth-cache.json`, `gh-pr-status-cache.json`. `launch.json` is deliberately *not* in this list -- it is a preview launch config the product treats as writable configuration, not session state; `cowork_settings.json` is an alternate settings filename, likewise configuration-family.",
+        "re_measured": "2.1.283 (2026-09-27): members list re-derived from the artifact's path literals; see `members`."
       },
       {
         "path": "managed-settings",
         "reason": "Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.\n\n  * Linux — `/etc/claude-code/managed-settings.json`\n  * macOS — `/Library/Application Support/ClaudeCode/managed-settings.json`\n  * Windows — the `HKLM SOFTWARE/Policies/ClaudeCode` registry key, and `C:/Program Files/ClaudeCode/managed-settings.json`\n\n**The Windows line was `%ProgramData%\\\\ClaudeCode\\\\managed-settings.json` until 2026-08-30, and the sentence beside all three said they were path literals in the pinned product. Re-measured at 2.1.251, none of the three is.** Asked of both shipped artifacts -- `claude-code-linux-x64` and `claude-code-win32-x64`, each digest-checked against this baseline's own table before extracting:\n\n```\n                                                        win  linux\n  /etc/claude-code/managed-settings.json                  0     0\n  /Library/Application Support/ClaudeCode/managed-...     0     0\n  ProgramData\\\\ClaudeCode\\\\managed-settings.json          0     0\n  Program Files/ClaudeCode/managed-settings.json          1     1\n  SOFTWARE/Policies/ClaudeCode                            1     1\n  /etc/nddev-invented/managed-settings.json               0     0   (control)\n  NddevInvented/ClaudeCode/managed-settings.json          0     0   (control)\n```\n\nThe controls return zero, so the search discriminates. The three per-OS paths are joined at runtime -- the bytes carry `f(r,\"managed-settings.json\")` and `zt(iR,\"managed-settings.json\")` rather than any assembled form -- which is why every runtime-joined path in this record reads `page` and why a literal search cannot confirm one. **What the bytes do carry is one sentence naming the Windows pair**, and it is the only place in either artifact where a managed-settings path appears assembled:\n\n> *\"the HKLM SOFTWARE/Policies/ClaudeCode registry key or C:/Program Files/ClaudeCode/managed-settings.json — WSL reads managed settings from the full Windows policy chain (HKLM, C:/Program Files/ClaudeCode via DrvFs, HKCU)\"*\n\nSo the old Windows value was wrong and its replacement is measured rather than read off a page. `ProgramData` does occur in these bytes, four times, and none is about this product's policy: a sandbox base-named-objects list, a trust-CA helper, and an Azure agent token path. A grep that stopped at the bare word would have confirmed the wrong answer.\n\n**And one thing neither the old record nor the review had.** That sentence documents `wslInheritsWindowsSettings`: with it set in an admin-only Windows source, a WSL process reads the **Windows** policy chain rather than the Linux one. WSL is therefore not simply a Linux host for this product's policy layer, and a record that treats it as one answers the wrong question for a machine where that switch is on. Grok's own compatibility documentation describes the file, and the description is the reason this row exists: *\"a protected policy file for allowlists and defaults. Its values take precedence over user, project and local config **and cannot be overridden**.\"*\n\n**It bears on the `full-auto` posture.** That setup writes `permissions.defaultMode = bypassPermissions` and `sandbox.enabled = false` into the owned `settings.json`. Under a managed policy those keys are correct, at a correct path, in a file the product reads — and a higher layer overrides them. The setup installs, verifies and restores cleanly and **changes nothing**.\n\nThat is the third instance of one defect class in this estate: opencode's bare-string `permission`, antigravity's `toolPermissions`, and now a correct key under a layer that outranks it. The first two were fixed by writing the right key; this one cannot be fixed by writing anything, which is why it is written down instead.\n\n**Nothing to own and nothing to check at runtime.** A provider that read a system policy in order to warn about it would be reading a file it promises not to touch, on a path outside every target it is given.",
-        "source": "path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference"
+        "source": "path literals measured in the pinned product, 2026-08-28; the precedence sentence is from grok 1.0.5's embedded compatibility reference",
+        "note2": "**Adjacent config-family files measured in the 2.1.283 artifact, recorded here because none is a path this provider writes:** `remote-settings.json` (fetched remote managed settings cache), `cowork_settings.json` (alternate settings filename when cowork plugins are in play), `launch.json` (preview launch config, writable). All three are the product's own."
       },
       {
         "path": "$HOME/.agents/skills",
@@ -305,6 +363,52 @@
     "shape": "gzip-tar",
     "platforms": {
       "linux/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.283.tgz",
+        "bytes": 108771563,
+        "sha256": "sha256:e5ea2a2b09ad70e447d985bdcd1fb49ac60043cd4841ddc434cd69c5c8770bf7",
+        "member": "package/claude"
+      },
+      "linux/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.283.tgz",
+        "bytes": 108529866,
+        "sha256": "sha256:d14ec0fca400151092c926928fea7e8e38231f7a90e6e1f8eeb2a55c24676afb",
+        "member": "package/claude"
+      },
+      "macos/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.283.tgz",
+        "bytes": 98721064,
+        "sha256": "sha256:ce1799101976be0c35e10f2d6fe959369b3be6227645332671475cafd6f45591",
+        "member": "package/claude"
+      },
+      "macos/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.283.tgz",
+        "bytes": 102777696,
+        "sha256": "sha256:950368a19840116e3eddb0cbbfea108e8fc3e7b7ca5f36590e7a11984127a826",
+        "member": "package/claude"
+      },
+      "windows/arm64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.283.tgz",
+        "bytes": 107274873,
+        "sha256": "sha256:8fcd85c3356ba33981d2a32e87ce01ce8bcf4dc3a0aa67cb055ccd9900569e60",
+        "member": "package/claude.exe"
+      },
+      "windows/x86_64": {
+        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.283.tgz",
+        "bytes": 111392373,
+        "sha256": "sha256:9a24a7de00831c064fef530d049271b9631340cfd51826c64d1e294482e6fc59",
+        "member": "package/claude.exe"
+      }
+    },
+    "version": "2.1.283",
+    "verified_at": "2026-09-27T07:40:49+00:00"
+  },
+  "verified_at": "2026-09-27T07:40:49+00:00",
+  "setup_catalogue_digest": "sha256:3cacf95bb0e5a85319c827c1513d08f23839a4ffa47712629b397861d6fc9eb4",
+  "previous_software_artifacts": {
+    "command": "claude",
+    "shape": "gzip-tar",
+    "platforms": {
+      "linux/arm64": {
         "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.282.tgz",
         "bytes": 107607069,
         "sha256": "sha256:3274e35357e8ea4f6676aa6770daa6c1281a29d52d7503775fee19c575ed0fd8",
@@ -343,52 +447,6 @@
     },
     "version": "2.1.282",
     "verified_at": "2026-09-25T11:46:47+00:00"
-  },
-  "verified_at": "2026-09-25T11:46:47+00:00",
-  "setup_catalogue_digest": "sha256:7289145558381e6893fdb4e6fe227f991739650d43d4c2d1f445255cdb72c170",
-  "previous_software_artifacts": {
-    "command": "claude",
-    "shape": "gzip-tar",
-    "platforms": {
-      "linux/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-arm64/-/claude-code-linux-arm64-2.1.278.tgz",
-        "bytes": 104532073,
-        "sha256": "sha256:ec54bd853c9cb71cb03874d694a1a38638d350828f0d84e0492fe1734a172302",
-        "member": "package/claude"
-      },
-      "linux/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-linux-x64/-/claude-code-linux-x64-2.1.278.tgz",
-        "bytes": 104055827,
-        "sha256": "sha256:d1fb51ab0a0234d1bd7f418ee9d6b6b124c2412b2ddaf3dfc3256bad8063f1c7",
-        "member": "package/claude"
-      },
-      "macos/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-arm64/-/claude-code-darwin-arm64-2.1.278.tgz",
-        "bytes": 94329072,
-        "sha256": "sha256:934a258c59e90ed6ba768d0d46502d3163607dec949845650af80e5f1228330c",
-        "member": "package/claude"
-      },
-      "macos/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-darwin-x64/-/claude-code-darwin-x64-2.1.278.tgz",
-        "bytes": 98435684,
-        "sha256": "sha256:36b343bc10f55627d773946ef521b020535d68c5b075bee77ed1091252f2f590",
-        "member": "package/claude"
-      },
-      "windows/arm64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-arm64/-/claude-code-win32-arm64-2.1.278.tgz",
-        "bytes": 103919037,
-        "sha256": "sha256:1fffc48348f421a0e5ce922e78140426d21eeb1fa536f07942f10064be55d90b",
-        "member": "package/claude.exe"
-      },
-      "windows/x86_64": {
-        "url": "https://registry.npmjs.org/@anthropic-ai/claude-code-win32-x64/-/claude-code-win32-x64-2.1.278.tgz",
-        "bytes": 106956684,
-        "sha256": "sha256:0fd2a29ad0752ab130f3e0bb0a34afd817a8cfef39e3f2d3adc60b5d54a22f71",
-        "member": "package/claude.exe"
-      }
-    },
-    "version": "2.1.278",
-    "verified_at": "2026-09-19T14:50:44+00:00"
   },
   "permission_boundary": {
     "measured_at": "2026-08-30",
@@ -432,5 +490,7 @@
     "control": "zzq-invented-surface-nobody-ships",
     "control_hits": 0,
     "method": "Every namespace this harness declares, global and scoped, searched as a fixed string in the artifact the current pin names, digest verified before reading; both the declared path and its last segment counted, because a product that composes a path by joining segments never spells the whole of it. A count here is a lower bound and not a routing proof -- what it answers is whether a surface vanished from the product under a version bump, which five of the seven took on 2026-09-02. The invented control was searched in the same run and found nowhere, so the search discriminates."
-  }
+  },
+  "plugin_source_types_note": "Measured 2026-09-27 against the 2.1.283 artifact: the install-command prefixes `pip`, `uv`, `cargo` and `gh` exist in the binary as *reserved* sources (`Installing plugins from <kind> (<package>@<kind>) is not available yet.`) -- recorded so a `<package>@pip` line in the wild is not read as a live feature. `directory`, `file`, `claudeai`, `seeded`, `settings`, `skills-dir` and `unsupported` are install-record provenance types in the same union, not marketplace.json entry sources.",
+  "native_plugin_surfaces_note": "Re-measured 2026-09-27 against the 2.1.283 artifact's plugin-manifest key tables. Grown members: `outputStyles`, `workflows`, `settings`, `experimental`, `metadata`, `displayName`, `author`, `homepage`, `repository`, `license`, `keywords` and `$schema` -- the last accepted and ignored at load time (\"JSON Schema reference ... ignored at load time\"), which is why a manifest can carry it for editors without the product acting on it."
 }
