@@ -400,9 +400,9 @@
       }
     },
     "version": "2.1.283",
-    "verified_at": "2026-09-27T07:40:49+00:00"
+    "verified_at": "2026-09-28T07:05:42+00:00"
   },
-  "verified_at": "2026-09-27T07:40:49+00:00",
+  "verified_at": "2026-09-28T07:05:42+00:00",
   "setup_catalogue_digest": "sha256:10d663026cecbe6de9abe3cd00e9ca0ffe8db499532ce7334e322fdfd397055e",
   "previous_software_artifacts": {
     "command": "claude",
