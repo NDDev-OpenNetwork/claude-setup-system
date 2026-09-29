@@ -24,15 +24,15 @@ instructions, skills, agents, commands, plugins and settings together, in one st
 
 ```bash
 claude-setup-system list
-claude-setup-system install baseline    --target ~/.tool-config
-claude-setup-system status              --target ~/.tool-config
-claude-setup-system select full-auto    --target ~/.tool-config
-claude-setup-system diff                --target ~/.tool-config
-claude-setup-system reinstall           --target ~/.tool-config
-claude-setup-system backups             --target ~/.tool-config
-claude-setup-system hold --backup slot-000000000001 --reason "before the experiment" --target ~/.tool-config
-claude-setup-system restore --backup slot-000000000001 --target ~/.tool-config
-claude-setup-system remove              --target ~/.tool-config
+claude-setup-system install baseline    --target ~/.claude
+claude-setup-system status              --target ~/.claude
+claude-setup-system select full-auto    --target ~/.claude
+claude-setup-system diff                --target ~/.claude
+claude-setup-system reinstall           --target ~/.claude
+claude-setup-system backups             --target ~/.claude
+claude-setup-system hold --backup slot-000000000001 --reason "before the experiment" --target ~/.claude
+claude-setup-system restore --backup slot-000000000001 --target ~/.claude
+claude-setup-system remove              --target ~/.claude
 ```
 
 Every command takes an explicit `--target`. There is no default and no fallback
@@ -47,8 +47,8 @@ seven setup systems, expressed in each product's own format:
 
 | | |
 | --- | --- |
-| `baseline` | a working floor: instructions plus a conservative configuration |
-| `minimal` | the product's own defaults, and the state a restore proves it can reach |
+| `baseline` | a working floor: instructions plus the shared autonomous posture |
+| `minimal` | instructions plus the shared autonomous posture, and nothing else |
 | `full-auto` | nothing asked and nothing sandboxed, in this product's own keys |
 | `nddev-builder` | the full-auto posture plus the product-native NDDev authoring toolkit |
 

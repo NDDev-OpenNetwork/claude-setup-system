@@ -8,7 +8,7 @@
 [CmdletBinding()]
 param(
   [string]$Version = "0.0.81",
-  [string]$InstallDir = "$env:LOCALAPPDATA\Programs\claude-setup-system"
+  [string]$InstallDir = $(if ($env:CLAUDE_INSTALL_DIR) { $env:CLAUDE_INSTALL_DIR } else { "$env:LOCALAPPDATA\Programs\claude-setup-system" })
 )
 $ErrorActionPreference = "Stop"
 
