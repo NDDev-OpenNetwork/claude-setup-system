@@ -15,6 +15,15 @@ cut and that this clone does not carry.
 
 ## [Unreleased]
 
+## [0.0.84] - 2026-09-30
+
+A routine pin refresh: six of the seven vendors published newer
+builds than the baselines carried, so the artifact tables were
+re-measured end to end — every digest computed from bytes this release
+read, npm artifacts additionally checked against the registry's own
+sha512. Claude Code now pins what its vendor publishes today.
+Protocol, ownership and the kit are unchanged.
+
 ## [0.0.83] - 2026-09-29
 
 A second audit of the seven rendered trees, run against the shipped
