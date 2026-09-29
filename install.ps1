@@ -7,7 +7,7 @@
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Version 0.1.0
 [CmdletBinding()]
 param(
-  [string]$Version = "0.0.82",
+  [string]$Version = "0.0.83",
   [string]$InstallDir = $(if ($env:CLAUDE_INSTALL_DIR) { $env:CLAUDE_INSTALL_DIR } else { "$env:LOCALAPPDATA\Programs\claude-setup-system" })
 )
 $ErrorActionPreference = "Stop"
