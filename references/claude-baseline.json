@@ -25,6 +25,7 @@
   "never_touch": [
     ".credentials.json",
     "projects",
+    "plugins",
     ".claude.json"
   ],
   "settings_surface": {
@@ -233,7 +234,7 @@
       },
       {
         "path": "keybindings.json",
-        "reason": "A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question.",
+        "reason": "A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five routed namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question.",
         "source": "measured from the 2.1.250 binary's path literals",
         "note": "**Re-asked at 2.1.251 on 2026-08-31.** The pinned `claude-code-linux-x64-2.1.251.tgz` was fetched and its sha256 checked against this baseline's own artifact table before a byte was read; the row still stands (`keybindings.json` 41). Controls `nddev_invented_reference_line`, `.claude/nddev-not-a-surface` and `NDDEV_INVENTED_SURFACE` each returned zero in the same bytes."
       },
@@ -262,7 +263,7 @@
       },
       {
         "path": "session-runtime-state",
-        "reason": "One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration.",
+        "reason": "One row for the rest: `history.jsonl`, `checkpoints`, `debug`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox`, `bash-log.txt`, `first-run`, `feedback/drafts`, `session-env`, `uploads`, `mcp-skill-archives`, `usage-data`, `mcp-discovery-cache`, `scheduled_tasks.json`, `scheduled_tasks.lock`, `routines/.state`, `worktrees`, `remote-settings.json`, `roster.json`, `adopt.json`, `state/settings-review.json`, `state/unattended-serving-consent.json`, `mcp-needs-auth-cache.json`, `gh-pr-status-cache.json`. Session, daemon and utility lifetime, none of it configuration.",
         "source": "measured from the 2.1.250 binary's path literals",
         "members": [
           "history.jsonl",
@@ -403,7 +404,7 @@
     "verified_at": "2026-09-28T14:26:29+00:00"
   },
   "verified_at": "2026-09-28T14:26:29+00:00",
-  "setup_catalogue_digest": "sha256:036fcf4c694288b5d5d4d3b949ab51c664cff17653739cc0fa2e23b616e6bb95",
+  "setup_catalogue_digest": "sha256:8dc0263b36f6e88b639d26ebd62fc8091cc3056229719ee84c3824e73e001661",
   "previous_software_artifacts": {
     "command": "claude",
     "shape": "gzip-tar",

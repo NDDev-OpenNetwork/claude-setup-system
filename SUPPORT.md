@@ -45,7 +45,7 @@ in a JSON file it owns it strips the keys it added rather than taking the
 file. Anything under those paths this build never wrote stays. Emptying every
 owned namespace is a separate, explicitly named operation: `reset`.
 
-Measured, with the real product: `mcp add --scope user` writes `.claude.json`, which is in `never_touch` -- the product's account state, so this build neither captures nor withdraws it. For the surfaces this build does own the receipt discipline is the same: a file it wrote is captured into a slot before the next `install`, and `restore` returns it byte for byte.
+Measured, with the real product: `mcp add --scope user` writes `.claude.json`, which is in `never_touch` -- the product's account state, so in the ordinary lifecycle this build neither captures nor withdraws it. (The opt-in `complete_native` capture mode, which is not the ordinary lifecycle, does copy it into a backup payload.) For the surfaces this build does own the receipt discipline is the same: a file it wrote is captured into a slot before the next `install`, and `restore` returns it byte for byte.
 
 So: point `--target` at a home you are willing to have managed. `backups
 --target <dir>` names every earlier state and which setup each preceded, and
@@ -172,14 +172,18 @@ Configuration home as the product documents it: `~/.claude`.
 | `routines` | -- | path literal read from the 2.1.283 artifact, 2026-09-27 |
 | `themes` | -- | path literal read from the 2.1.283 artifact (`userConfigDir("themes")` batch-read of `*.json`), 2026-09-27 |
 
-A path routing no component kind is owned so a setup can carry it;
-nothing compiles a component to it.
+A custody row like `output-styles`, `routines`, `rules`, `themes`, `workflows` routes no component kind because no setup
+can ever fill it: it is owned so a backup captures it and `remove`
+withdraws it, and so a posture switch does not empty it.
 
 ### A second target: `target_scope: project`
 
-Rooted at `project root`, which is not the configuration home
-above. A consumer reaches it by naming the scope on the request, and
-every path below is relative to that root.
+This scope's target is the workspace root rather than the
+configuration home above; the scope record names its anchor
+`project root`. A consumer reaches it by naming the scope on
+the request, and every path below is relative to the workspace
+root -- where the product owns a directory there, that directory
+is part of the path.
 
 | Path | Component kinds routed here | Decided by |
 | --- | --- | --- |
@@ -212,7 +216,7 @@ other file beside a target.
 
 **`.claude-setup-system`** -- This provider's own control directory: the target lock, the backup slots and their payloads. Kept out of the declaration for the same reason as the state file, and recorded here because the declined list is where a reader looks before opening a file to find out what it is. (this provider's own contract; no vendor page is involved)
 
-**`keybindings.json`** -- A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question. (measured from the 2.1.250 binary's path literals)
+**`keybindings.json`** -- A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five routed namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question. (measured from the 2.1.250 binary's path literals)
 
 **`statusline-command.sh`** -- A shell script the product runs to render its status line, with a PowerShell sibling `statusline.ps1`. Configuration in the sense that a person chooses it, and never ownable by this provider: a setup that wrote an executable a product runs is a setup that runs code on somebody's machine. (measured from the 2.1.250 binary's path literals)
 
@@ -220,7 +224,7 @@ other file beside a target.
 
 **`local`** -- An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable. (measured from the 2.1.250 binary's path literals)
 
-**`session-runtime-state`** -- One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration. (measured from the 2.1.250 binary's path literals)
+**`session-runtime-state`** -- One row for the rest: `history.jsonl`, `checkpoints`, `debug`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox`, `bash-log.txt`, `first-run`, `feedback/drafts`, `session-env`, `uploads`, `mcp-skill-archives`, `usage-data`, `mcp-discovery-cache`, `scheduled_tasks.json`, `scheduled_tasks.lock`, `routines/.state`, `worktrees`, `remote-settings.json`, `roster.json`, `adopt.json`, `state/settings-review.json`, `state/unattended-serving-consent.json`, `mcp-needs-auth-cache.json`, `gh-pr-status-cache.json`. Session, daemon and utility lifetime, none of it configuration. (measured from the 2.1.250 binary's path literals)
 
 **`managed-settings`** -- Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.
 
