@@ -27,7 +27,7 @@ Confirmed 2026-08-29 from the 2.1.251 artifact, whose bytes match this baseline'
 | `pi` | `AGENTS.md` | file |
 
 **They are not interchangeable, and the difference is not only the
-name.** One of the seven takes a *directory* of rules rather than a
+name.** Two of the seven take a *directory* of rules rather than a
 single document, so a file moved between the two is not a rename.
 
 **Some products read a neighbour's.** `references/surfaces.md` records

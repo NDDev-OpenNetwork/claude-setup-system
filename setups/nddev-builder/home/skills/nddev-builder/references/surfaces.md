@@ -45,10 +45,12 @@ surfaces makes a consumer's route ambiguous, and the guard in
 
 ## A second target: `target_scope: project`
 
-Rooted at `project root`, which is **not** this product's configuration
-home. A consumer reaches it by naming the scope on the request, and
-every path below is relative to that root rather than to the home
-above -- writing the root into the path again would nest it twice.
+This scope's target is the workspace root (the record names
+its anchor `project root`), which is **not** this product's
+configuration home. A consumer reaches it by naming the scope
+on the request, and every path below is relative to the
+workspace root -- a product-owned directory stays part of the
+path.
 
 | path | routes | shape | decided by | exercised by |
 | --- | --- | --- | --- | --- |
@@ -77,10 +79,10 @@ whole, which would take or revert a neighbour's work.
 - **`backups`** — The product's own backup directory, created beside the file it backs up when `mcp add` rewrites `.claude.json`. Measured 2026-08-28. Distinct from this provider's slots, which live under its control directory.
 - **`NDDEV-CLAUDE-PROVIDER.json`** — This provider's own state file: which setup is applied, the identity it recorded, and which slot reverses the last operation. Written by every operation and excluded from target identity, because counting it would leave a target different from the identity the operation just wrote. Not a projection surface and never ownable as one.
 - **`.claude-setup-system`** — This provider's own control directory: the target lock, the backup slots and their payloads. Kept out of the declaration for the same reason as the state file, and recorded here because the declined list is where a reader looks before opening a file to find out what it is.
-- **`keybindings.json`** — A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question.
+- **`keybindings.json`** — A keymap file, the same surface antigravity owns and records. Not owned here, and the asymmetry is deliberate rather than an oversight: no component kind describes a keymap, so owning it buys only backup coverage, and this provider's target already holds five routed namespaces a person edits by hand. Recorded so the next reader finds the answer rather than the question.
 - **`statusline-command.sh`** — A shell script the product runs to render its status line, with a PowerShell sibling `statusline.ps1`. Configuration in the sense that a person chooses it, and never ownable by this provider: a setup that wrote an executable a product runs is a setup that runs code on somebody's machine.
 - **`agent-runtime-state`** — One row for the agent subtree beside the owned `agents`: `agent-registry.json`, `agent-memory/<agentType>/` and `agent-memory-local/<agentType>/`. What an agent has learned and which are registered, both the product's lifetime rather than a setup's.
 - **`local`** — An installed copy of the product inside its own configuration home -- `local/claude` and `local/node_modules/`. Never ownable: this provider installs programs under a `--prefix` that is deliberately not the target, and owning a directory that holds a binary would let a restore replace an executable.
-- **`session-runtime-state`** — One row for the rest: `history.jsonl`, `checkpoints/`, `debug/<session>.txt`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox/`, `bash-log.txt`, `first-run`, `feedback/drafts/`. Session and daemon lifetime, none of it configuration.
+- **`session-runtime-state`** — One row for the rest: `history.jsonl`, `checkpoints`, `debug`, `daemon.json`, `daemon.log`, `assistant-daemon-state.json`, `jobs`, `mailbox`, `bash-log.txt`, `first-run`, `feedback/drafts`, `session-env`, `uploads`, `mcp-skill-archives`, `usage-data`, `mcp-discovery-cache`, `scheduled_tasks.json`, `scheduled_tasks.lock`, `routines/.state`, `worktrees`, `remote-settings.json`, `roster.json`, `adopt.json`, `state/settings-review.json`, `state/unattended-serving-consent.json`, `mcp-needs-auth-cache.json`, `gh-pr-status-cache.json`. Session, daemon and utility lifetime, none of it configuration.
 - **`managed-settings`** — Not a path in the target, and named without an extension for that reason: `managed-settings.json` lives at a **system** path, one per operating system, and every recorded path here is relative to the target.
 - **`$HOME/.agents/skills`** — The shared cross-product skills convention: `~/.agents/skills`. **This product now opens it -- but only as a migration source.** A scan imports foreign roots (`~/.cursor/*`, `~/.gemini/*`, `~/.agents/skills`, project `.agents/skills`) into `.claude/`, symlink-checked, and that is not a skills root the product reads as its own. Five of the seven declare `scoped_projection_profiles` for `user_root`; this one declares none, and an unexplained absence on a page reads exactly like an oversight.
