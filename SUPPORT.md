@@ -64,7 +64,7 @@ newer. `scoped_projection_profiles` (`ADR-0125`) is the field this applies to,
 and it is omitted entirely when empty -- so a build that declares no scope
 satisfies an older checker by accident, and a build that declares one does not.
 
-Two versions, two different answers, both measured:
+Three versions, three different answers, all measured:
 
 | checker | result |
 | --- | --- |
