@@ -401,9 +401,9 @@
       }
     },
     "version": "2.1.285",
-    "verified_at": "2026-09-29T21:23:31+00:00"
+    "verified_at": "2026-09-30T07:06:34+00:00"
   },
-  "verified_at": "2026-09-29T21:23:31+00:00",
+  "verified_at": "2026-09-30T07:06:34+00:00",
   "setup_catalogue_digest": "sha256:664ba30239608cd272d64b06acb4bb4162b4bb178ea0cd550e5a7aedb3ca5188",
   "previous_software_artifacts": {
     "command": "claude",
