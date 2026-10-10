@@ -141,7 +141,7 @@ dependencies = [
 
 [[package]]
 name = "claude-setup-system"
-version = "0.0.88"
+version = "0.0.89"
 dependencies = [
  "harness-runtime",
  "provider-v3",
@@ -249,7 +249,7 @@ checksum = "e4eba85ea1d0a966a983acd07deee566e67395d2d96b6fb39e62b5a833f1eb0b"
 
 [[package]]
 name = "harness-runtime"
-version = "0.0.88"
+version = "0.0.89"
 dependencies = [
  "provider-v3",
  "serde",
@@ -439,7 +439,7 @@ dependencies = [
 
 [[package]]
 name = "provider-v3"
-version = "0.0.88"
+version = "0.0.89"
 dependencies = [
  "serde",
  "serde_json",
@@ -590,7 +590,7 @@ dependencies = [
 
 [[package]]
 name = "setup-core"
-version = "0.0.88"
+version = "0.0.89"
 dependencies = [
  "cap-fs-ext",
  "cap-std",
