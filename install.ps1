@@ -7,12 +7,12 @@
 #   powershell -ExecutionPolicy Bypass -File install.ps1 -Version 0.1.0
 [CmdletBinding()]
 param(
-  [string]$Version = "0.0.93",
+  [string]$Version = "0.0.94",
   [string]$InstallDir = $(if ($env:CLAUDE_INSTALL_DIR) { $env:CLAUDE_INSTALL_DIR } else { "$env:LOCALAPPDATA\Programs\claude-setup-system" })
 )
 $ErrorActionPreference = "Stop"
 
-$repo   = "NDDev-OpenNetwork/claude-setup-system"
+$repo   = "NDDev-Technocracy-OpenNetwork/claude-setup-system"
 $binary = "claude-setup-system"
 $arch   = switch ($env:PROCESSOR_ARCHITECTURE) {
   "AMD64" { "x86_64" }
