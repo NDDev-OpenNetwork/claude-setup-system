@@ -12,7 +12,7 @@ param(
 )
 $ErrorActionPreference = "Stop"
 
-$repo   = "NDDev-Technocracy-OpenNetwork/claude-setup-system"
+$repo   = "NDDev-Technocracy-Archive/claude-setup-system"
 $binary = "claude-setup-system"
 $arch   = switch ($env:PROCESSOR_ARCHITECTURE) {
   "AMD64" { "x86_64" }
