@@ -12,7 +12,7 @@
 #   sh install.sh 0.1.0        # a specific release
 set -eu
 
-REPO="NDDev-Technocracy-OpenNetwork/claude-setup-system"
+REPO="NDDev-Technocracy-Archive/claude-setup-system"
 BINARY="claude-setup-system"
 VERSION="${1:-0.0.94}"
 PREFIX="${CLAUDE_INSTALL_DIR:-$HOME/.local/bin}"
